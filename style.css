@@ -143,6 +143,33 @@ nav .badge {
     flex: 1;
     max-width: 600px;
 }
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+.badge-stream {
+    background: rgba(0,0,0,0.04);
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+.badge-fan {
+    background: rgba(255, 105, 180, 0.08);
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(255, 105, 180, 0.15);
+}
+
 .hero h2 {
     font-size: 3.2rem;
     font-weight: 800;
@@ -306,6 +333,13 @@ footer {
     color: var(--muted);
     opacity: 0.6;
 }
+footer p:last-child {
+    opacity: 0.15;
+    font-size: 0.55rem;
+    letter-spacing: 0.5px;
+    margin-top: 1rem;
+}
+
 @media (max-width: 768px) {
     body { padding-top: 64px; }
     .site-header { padding: 0 1rem; height: 64px; }
