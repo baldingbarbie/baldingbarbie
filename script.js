@@ -1,12 +1,18 @@
 (function () {
-    let tears = localStorage.getItem("swiftieTears") ? parseInt(localStorage.getItem("swiftieTears")) : 0;
-    const counter = document.getElementById("tearCount");
-    if (counter) counter.innerText = tears;
+    const tearKey = "swiftieTears";
+    let tears = parseInt(localStorage.getItem(tearKey)) || 0;
+
+    const updateDisplays = () => {
+        document.querySelectorAll("#tearCounter, #tearDisplay").forEach((el) => {
+            if (el) el.textContent = tears;
+        });
+    };
 
     window.addTear = function () {
-        tears++;
-        localStorage.setItem("swiftieTears", tears);
-        const el = document.getElementById("tearCount");
-        if (el) el.innerText = tears;
+        tears += 1;
+        localStorage.setItem(tearKey, String(tears));
+        updateDisplays();
     };
+
+    updateDisplays();
 })();
