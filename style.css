@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #0d0d0d;
+    color: #ffb6c1;
+    font-family: "Courier New", monospace;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 1rem 2rem;
+}
+header {
+    border-bottom: 2px solid #ff1493;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+h1 {
+    font-size: 3rem;
+    background: linear-gradient(45deg, #ff1493, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.tagline {
+    font-size: 1.2rem;
+    color: #ff69b4;
+    opacity: 0.8;
+}
+nav {
+    display: flex;
+    gap: 2rem;
+    margin: 1rem 0 2rem 0;
+}
+nav a {
+    color: #ff69b4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+nav a:hover {
+    text-decoration: underline;
+    color: #ff1493;
+}
+main {
+    flex: 1;
+}
+.hero {
+    background: #1a1a1a;
+    padding: 2rem;
+    border-left: 6px solid #ff1493;
+    border-radius: 0 20px 20px 0;
+    margin-bottom: 2rem;
+}
+.hero h2 {
+    font-size: 2.5rem;
+    color: #ff69b4;
+}
+.hero p {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: #eee;
+}
+.btn {
+    display: inline-block;
+    background: #ff1493;
+    color: #0d0d0d;
+    padding: 0.5rem 2rem;
+    border-radius: 99px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+.btn:hover {
+    background: #ff69b4;
+}
+.preview ul {
+    list-style: none;
+    font-size: 1.2rem;
+    line-height: 2;
+}
+.preview ul li::before {
+    content: "✧ ";
+    color: #ff1493;
+}
+.facts-list .fact-card {
+    background: #1a1a1a;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #ff1493;
+    border-radius: 0 12px 12px 0;
+}
+.fact-card h3 {
+    color: #ff69b4;
+    margin-bottom: 0.5rem;
+}
+.fact-card p {
+    color: #ddd;
+    line-height: 1.6;
+}
+footer {
+    border-top: 1px solid #333;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.5;
+    text-align: center;
+}
