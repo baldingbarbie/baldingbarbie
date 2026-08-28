@@ -1,18 +1,15 @@
-(function () {
-    const tearKey = "swiftieTears";
+(function() {
+    const tearKey = 'swiftieTears';
     let tears = parseInt(localStorage.getItem(tearKey)) || 0;
-
     const updateDisplays = () => {
-        document.querySelectorAll("#tearCounter, #tearDisplay").forEach((el) => {
+        document.querySelectorAll('#tearCounter, #tearCounter2').forEach(el => {
             if (el) el.textContent = tears;
         });
     };
-
-    window.addTear = function () {
+    window.addTear = function() {
         tears += 1;
         localStorage.setItem(tearKey, String(tears));
         updateDisplays();
     };
-
     updateDisplays();
 })();
