@@ -139,4 +139,134 @@
             insertPoint.appendChild(wrapper);
         }
     })();
+
+
+    // ============================================================
+    // FLYING PLANE WITH VAPOR TRAIL
+    // ============================================================
+    (function() {
+        // Check if we're on mobile (hide if screen < 768px)
+        if (window.innerWidth < 768) return;
+
+        const statsBar = document.querySelector('.stats-bar');
+        if (!statsBar) return;
+
+        // Create a container for the plane
+        const container = document.createElement('div');
+        container.style.cssText = `
+            grid-column: 1 / -1;
+            position: relative;
+            height: 40px;
+            overflow: visible;
+            margin-top: -0.5rem;
+            margin-bottom: 0.5rem;
+            pointer-events: none;
+            user-select: none;
+        `;
+        statsBar.appendChild(container);
+
+        // Vapor trail (SVG)
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('width', '100%');
+        svg.setAttribute('height', '40');
+        svg.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: visible;
+        `;
+        container.appendChild(svg);
+
+        // Vapor trail path
+        const trail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        trail.setAttribute('d', '');
+        trail.setAttribute('fill', 'none');
+        trail.setAttribute('stroke', 'rgba(255, 182, 193, 0.4)');
+        trail.setAttribute('stroke-width', '2');
+        trail.setAttribute('stroke-linecap', 'round');
+        trail.setAttribute('stroke-dasharray', '4 6');
+        svg.appendChild(trail);
+
+        // Plane element
+        const plane = document.createElement('div');
+        plane.textContent = '✈️';
+        plane.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%) scaleX(-1);
+            font-size: 1.4rem;
+            line-height: 1;
+            transition: none;
+            filter: drop-shadow(0 2px 4px rgba(255, 105, 180, 0.15));
+            will-change: transform;
+        `;
+        container.appendChild(plane);
+
+        // Animation state
+        let startTime = null;
+        const duration = 7000; // 7 seconds per loop
+        const trailLength = 120; // px of trail behind plane
+
+        function animate(time) {
+            if (!startTime) startTime = time;
+            const elapsed = (time - startTime) % duration;
+            const progress = elapsed / duration; // 0 → 1
+
+            // Ease in-out for smooth feel
+            const eased = progress < 0.5
+                ? 2 * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+            // Get container width
+            const rect = container.getBoundingClientRect();
+            const width = rect.width || 800;
+
+            // Plane position (left → right)
+            const x = eased * (width + 60) - 30;
+            const y = 20 + Math.sin(progress * Math.PI * 2) * 2; // gentle wave
+
+            // Update plane position
+            plane.style.left = `${x}px`;
+            plane.style.top = `${y}px`;
+
+            // Update vapor trail (SVG path)
+            const trailStart = Math.max(0, x - trailLength);
+            const trailPoints = [];
+            const steps = 20;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const px = trailStart + t * trailLength;
+                const py = 20 + Math.sin((progress - (1 - t) * 0.15) * Math.PI * 2) * 2;
+                trailPoints.push(`${px.toFixed(1)},${py.toFixed(1)}`);
+            }
+            trail.setAttribute('d', `M${trailPoints.join(' L')}`);
+
+            // Fade trail opacity based on distance from plane
+            const trailGradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            trailGradient.id = 'trailGrad';
+            trailGradient.innerHTML = `
+                <stop offset="0%" stop-color="rgba(255, 182, 193, 0)" />
+                <stop offset="80%" stop-color="rgba(255, 182, 193, 0.3)" />
+                <stop offset="100%" stop-color="rgba(255, 182, 193, 0.6)" />
+            `;
+            svg.appendChild(trailGradient);
+
+            requestAnimationFrame(animate);
+        }
+
+        // Start animation
+        requestAnimationFrame(animate);
+
+        // Handle resize to recalculate
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Just reset startTime to avoid jumps
+                startTime = null;
+            }, 200);
+        });
+    })();
 })();
