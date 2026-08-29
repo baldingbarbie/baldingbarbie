@@ -40,12 +40,15 @@
         "dateModified": "2026-08-28"
     }
     </script>
-    <link rel="stylesheet" href="style.css?v=0.10" />
+    <link rel="stylesheet" href="style.css?v=9" />
 </head>
 <body>
+    <!-- JF Badge (preserved) -->
     <a href="https://jeffbraches.com" target="_blank" rel="noopener noreferrer" class="jf-badge">
-        <span class="jf-box">made by jeff branches</span>
+        <span class="jf-box">Made by Jeff Braches</span>
     </a>
+
+    <!-- Header -->
     <header class="site-header">
         <div class="header-inner">
             <div class="logo">
@@ -59,8 +62,10 @@
             </nav>
         </div>
     </header>
+
+    <!-- Hero: Left Text + Right Auto-Scrolling Cards -->
     <section class="hero">
-        <div class="hero-inner">
+        <div class="hero-left">
             <div class="hero-badges">
                 <span class="badge-stream">🎧 currently streaming: he loves me not – james charles · 47 plays</span>
                 <span class="badge-fan">💄 jeffree star · top 0.1% gifter on TikTok Live</span>
@@ -72,13 +77,31 @@
             <p>No billionaire is ethical. Here's the documentation.</p>
             <a href="#facts" class="btn-primary">View the evidence ↓</a>
         </div>
-        <div class="hero-floating">
-            <img src="assets/james1.webp" class="float-img float-1" alt="" loading="lazy" />
-            <img src="assets/james2.webp" class="float-img float-2" alt="" loading="lazy" />
-            <img src="assets/jeff1.webp" class="float-img float-3" alt="" loading="lazy" />
-            <img src="assets/jeff2.webp" class="float-img float-4" alt="" loading="lazy" />
+        <div class="hero-right">
+            <div class="hero-carousel">
+                <div class="carousel-track" id="heroCarousel">
+                    <div class="carousel-slide">
+                        <img src="assets/james1.webp" alt="" loading="lazy" />
+                        <span class="slide-label">james charles · he loves me not</span>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/jeff1.webp" alt="" loading="lazy" />
+                        <span class="slide-label">jeffree star · makeup mogul</span>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/james2.webp" alt="" loading="lazy" />
+                        <span class="slide-label">james charles · iconic</span>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="assets/jeff2.webp" alt="" loading="lazy" />
+                        <span class="slide-label">jeffree star · tiktok live royalty</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Stats Bar -->
     <section class="stats-bar">
         <div class="stat-item">
             <span class="stat-number">$452B</span>
@@ -97,6 +120,8 @@
             <span class="stat-label">Swiftie tears collected</span>
         </div>
     </section>
+
+    <!-- Facts Grid (Horizontal scroll on mobile, grid on desktop) -->
     <section class="facts-section" id="facts">
         <h2 class="section-title">Facts <span>that matter</span></h2>
         <div class="facts-grid">
@@ -168,6 +193,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Counter -->
     <section class="counter-section" id="counter">
         <p>💧 Click to register your disappointment</p>
         <button onclick="addTear()" class="btn-primary">Shed a tear for Swifties</button>
@@ -175,11 +202,20 @@
             Total tears: <span id="tearCounter2" style="color:var(--primary); font-weight:700; font-size:1.4rem;">0</span>
         </div>
     </section>
+
+    <!-- Footer -->
     <footer>
         <p>All claims sourced from public records.</p>
         <p style="margin-top:0.5rem; opacity:0.4; font-size:0.75rem;">Not affiliated with Taylor Swift. Satirical critique.</p>
-        <p style="margin-top:1rem; opacity:0.15; font-size:0.55rem; letter-spacing:0.5px;">parody website · for entertainment purposes only</p>
+        <p style="margin-top:0.5rem; opacity:0.3; font-size:0.6rem; letter-spacing:0.3px;">
+            All opinions expressed are satirical and do not reflect factual claims about Taylor Swift's character or intentions.
+        </p>
+        <p style="margin-top:1rem; opacity:0.12; font-size:0.55rem; letter-spacing:0.5px;">parody website · for entertainment purposes only</p>
+        <p style="margin-top:0.5rem; opacity:0.15; font-size:0.55rem;">
+            <a href="/about" style="color:var(--muted); text-decoration:none;">about</a>
+        </p>
     </footer>
-    <script src="script.js?v=0.10"></script>
+
+    <script src="script.js?v=9"></script>
 </body>
 </html>
