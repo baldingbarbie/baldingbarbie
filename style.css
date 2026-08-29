@@ -216,7 +216,7 @@ nav .badge {
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* Hero Carousel – Auto-Scrolling */
+/* Hero Carousel – Horizontal Auto-Scrolling Fact Teasers */
 .hero-carousel {
     width: 100%;
     height: 100%;
@@ -227,40 +227,48 @@ nav .badge {
     background: var(--surface-solid);
     border: 1px solid var(--border);
 }
-.carousel-track {
+.hero-carousel.horizontal {
     display: flex;
-    flex-direction: column;
-    animation: scrollCards 16s ease-in-out infinite;
+    flex-direction: row;
+    animation: scrollHorizontal 20s ease-in-out infinite;
+    width: 400%;
 }
-.carousel-slide {
-    flex: 0 0 100%;
+.hero-carousel.horizontal .carousel-slide {
+    flex: 0 0 25%;
+    padding: 1.5rem 1rem;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    align-items: center;
     text-align: center;
+    background: var(--surface-solid);
+    border-right: 1px solid var(--border);
 }
-.carousel-slide img {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
-    margin-bottom: 0.75rem;
+.hero-carousel.horizontal .carousel-slide:last-child {
+    border-right: none;
 }
-.carousel-slide .slide-label {
+.hero-carousel.horizontal .fact-teaser .teaser-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.hero-carousel.horizontal .fact-teaser h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--text);
+}
+.hero-carousel.horizontal .fact-teaser p {
     font-size: 0.85rem;
     color: var(--muted);
-    font-weight: 500;
-    letter-spacing: 0.2px;
 }
-@keyframes scrollCards {
-    0%, 22% { transform: translateY(0%); }
-    25%, 47% { transform: translateY(-25%); }
-    50%, 72% { transform: translateY(-50%); }
-    75%, 97% { transform: translateY(-75%); }
-    100% { transform: translateY(-100%); }
+@keyframes scrollHorizontal {
+    0%, 20% { transform: translateX(0%); }
+    25%, 45% { transform: translateX(-25%); }
+    50%, 70% { transform: translateX(-50%); }
+    75%, 95% { transform: translateX(-75%); }
+    100% { transform: translateX(0%); }
 }
 
 /* ===== STATS BAR ===== */
@@ -293,6 +301,42 @@ nav .badge {
 .stat-label {
     font-size: 0.8rem;
     color: var(--muted);
+}
+
+/* Photo Avatars in Stats Bar */
+.photo-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+    border: none;
+    background: transparent;
+}
+.photo-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+.photo-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+}
+.photo-avatar img:hover {
+    transform: scale(1.08);
+    border-color: var(--primary);
+}
+.photo-avatar span {
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
 }
 
 /* ===== FACTS ===== */
@@ -413,8 +457,19 @@ footer a:hover {
         max-width: 400px;
         margin: 0 auto;
     }
-    .carousel-slide img {
-        max-width: 200px;
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 160px;
+        padding: 1rem;
+    }
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 2rem;
+    }
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.9rem;
+    }
+    .photo-avatar img {
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -429,7 +484,26 @@ footer a:hover {
     .hero-badges { flex-direction: column; align-items: center; gap: 0.5rem; }
     .badge-stream, .badge-fan { font-size: 0.65rem; padding: 0.2rem 0.8rem; white-space: normal; }
     .hero-right { min-height: 240px; max-width: 320px; }
-    .carousel-slide img { max-width: 160px; }
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 140px;
+        padding: 0.75rem;
+    }
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1.6rem;
+    }
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.8rem;
+    }
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.7rem;
+    }
+    .photo-avatar img {
+        width: 36px;
+        height: 36px;
+    }
+    .photo-avatar span {
+        font-size: 0.5rem;
+    }
     .facts-grid {
         display: flex;
         flex-wrap: nowrap;
@@ -455,6 +529,10 @@ footer a:hover {
     }
     .stat-item { padding: 1rem 0.5rem; }
     .stat-number { font-size: 1.5rem; }
+    .photo-row {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -462,6 +540,22 @@ footer a:hover {
     .hero p { font-size: 1rem; }
     .btn-primary { padding: 0.6rem 1.8rem; font-size: 0.85rem; }
     .hero-right { min-height: 200px; max-width: 260px; }
-    .carousel-slide img { max-width: 130px; }
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 120px;
+        padding: 0.5rem;
+    }
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1.4rem;
+    }
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.7rem;
+    }
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.6rem;
+    }
     .badge-stream, .badge-fan { font-size: 0.55rem; padding: 0.15rem 0.6rem; }
+    .photo-avatar img {
+        width: 32px;
+        height: 32px;
+    }
 }

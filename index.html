@@ -40,7 +40,7 @@
         "dateModified": "2026-08-28"
     }
     </script>
-    <link rel="stylesheet" href="style.css?v=9" />
+    <link rel="stylesheet" href="style.css?v=0.11" />
 </head>
 <body>
     <!-- JF Badge (preserved) -->
@@ -78,24 +78,26 @@
             <a href="#facts" class="btn-primary">View the evidence ↓</a>
         </div>
         <div class="hero-right">
-            <div class="hero-carousel">
-                <div class="carousel-track" id="heroCarousel">
-                    <div class="carousel-slide">
-                        <img src="assets/james1.webp" alt="" loading="lazy" />
-                        <span class="slide-label">james charles · he loves me not</span>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="assets/jeff1.webp" alt="" loading="lazy" />
-                        <span class="slide-label">jeffree star · makeup mogul</span>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="assets/james2.webp" alt="" loading="lazy" />
-                        <span class="slide-label">james charles · iconic</span>
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="assets/jeff2.webp" alt="" loading="lazy" />
-                        <span class="slide-label">jeffree star · tiktok live royalty</span>
-                    </div>
+            <div class="hero-carousel horizontal" id="heroCarousel">
+                <div class="carousel-slide fact-teaser">
+                    <span class="teaser-icon">🏛️</span>
+                    <h4>ICE detention owner at her wedding</h4>
+                    <p>Amentum Services ~ $452.9B contract</p>
+                </div>
+                <div class="carousel-slide fact-teaser">
+                    <span class="teaser-icon">💰</span>
+                    <h4>$26M donation — zero LGBT+ charities</h4>
+                    <p>"The safest possible charity list"</p>
+                </div>
+                <div class="carousel-slide fact-teaser">
+                    <span class="teaser-icon">✈️</span>
+                    <h4>138 tons CO₂ from private jets</h4>
+                    <p>16 homes' annual energy usage</p>
+                </div>
+                <div class="carousel-slide fact-teaser">
+                    <span class="teaser-icon">📦</span>
+                    <h4>324,000+ vinyl variants sold</h4>
+                    <p>80+ variants across 3 albums</p>
                 </div>
             </div>
         </div>
@@ -118,6 +120,25 @@
         <div class="stat-item">
             <span class="stat-number" id="tearCounter">0</span>
             <span class="stat-label">Swiftie tears collected</span>
+        </div>
+        <!-- Photo avatars row -->
+        <div class="stat-item photo-row" style="grid-column: 1 / -1; display: flex; justify-content: center; gap: 1.5rem; padding: 0.5rem 0; border: none; background: transparent;">
+            <div class="photo-avatar">
+                <img src="assets/james1.webp" alt="James Charles" />
+                <span>james</span>
+            </div>
+            <div class="photo-avatar">
+                <img src="assets/james2.webp" alt="James Charles" />
+                <span>james</span>
+            </div>
+            <div class="photo-avatar">
+                <img src="assets/jeff1.webp" alt="Jeffree Star" />
+                <span>jeffree</span>
+            </div>
+            <div class="photo-avatar">
+                <img src="assets/jeff2.webp" alt="Jeffree Star" />
+                <span>jeffree</span>
+            </div>
         </div>
     </section>
 
@@ -216,6 +237,6 @@
         </p>
     </footer>
 
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=0.11"></script>
 </body>
 </html>
