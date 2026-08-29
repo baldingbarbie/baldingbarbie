@@ -14,9 +14,9 @@
     --primary-glow: rgba(255, 105, 180, 0.2);
     --text: #1a1a1a;
     --muted: #666;
-    --radius: 16px;
-    --shadow: 0 2px 16px rgba(0,0,0,0.04);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.06);
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.06);
     --transition: 0.25s ease;
     --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -29,20 +29,20 @@ body {
     font-family: var(--font);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    padding-top: 80px;
+    padding-top: 72px;
 }
 
 /* ===== JF BADGE ===== */
 .jf-badge {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     z-index: 9999;
     text-decoration: none;
     transition: all var(--transition);
 }
 .jf-badge:hover {
-    transform: translateY(-3px) scale(1.03);
+    transform: translateY(-2px) scale(1.03);
 }
 .jf-box {
     display: inline-block;
@@ -50,20 +50,20 @@ body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1.5px solid rgba(255, 105, 180, 0.25);
-    border-radius: 14px;
-    padding: 0.6rem 1.4rem;
+    border-radius: 12px;
+    padding: 0.4rem 1rem;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     letter-spacing: 0.3px;
     color: #4a3a4a;
-    box-shadow: 0 4px 24px rgba(255, 105, 180, 0.08);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.08);
     transition: all var(--transition);
 }
 .jf-badge:hover .jf-box {
     background: rgba(255, 255, 255, 0.96);
     border-color: #ff69b4;
-    box-shadow: 0 8px 40px rgba(255, 105, 180, 0.18);
+    box-shadow: 0 8px 32px rgba(255, 105, 180, 0.18);
 }
 .jf-box::before {
     content: '✦ ';
@@ -82,8 +82,8 @@ body {
     backdrop-filter: blur(16px) saturate(1.1);
     -webkit-backdrop-filter: blur(16px) saturate(1.1);
     border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    height: 72px;
+    padding: 0 1.5rem;
+    height: 64px;
     display: flex;
     align-items: center;
 }
@@ -96,27 +96,27 @@ body {
     align-items: center;
 }
 .logo h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     background: linear-gradient(135deg, #1a1a1a, #ff69b4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 .logo span {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--muted);
     display: block;
     -webkit-text-fill-color: var(--muted);
 }
 nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
     align-items: center;
 }
 nav a {
     color: var(--text);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     transition: color var(--transition);
 }
@@ -126,30 +126,30 @@ nav a:hover {
 nav .badge {
     background: var(--primary-dim);
     color: var(--primary);
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 99px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 600;
     border: 1px solid rgba(255, 105, 180, 0.15);
 }
 
-/* ===== HERO – LEFT TEXT + RIGHT CAROUSEL ===== */
+/* ===== HERO ===== */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 3rem 2rem 2rem 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
     display: flex;
     align-items: center;
-    gap: 3rem;
-    min-height: 60vh;
+    gap: 2.5rem;
+    min-height: 50vh;
 }
 .hero-left {
     flex: 1;
-    max-width: 550px;
+    max-width: 520px;
 }
 .hero-right {
     flex: 1;
-    min-height: 380px;
+    min-height: 320px;
     position: relative;
     overflow: hidden;
     border-radius: var(--radius);
@@ -157,35 +157,35 @@ nav .badge {
 .hero-badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
 }
 .badge-stream {
     background: rgba(0,0,0,0.04);
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 99px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--muted);
     font-weight: 500;
     letter-spacing: 0.2px;
 }
 .badge-fan {
     background: rgba(255, 105, 180, 0.08);
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: 99px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--primary);
     font-weight: 500;
     letter-spacing: 0.2px;
     border: 1px solid rgba(255, 105, 180, 0.15);
 }
 .hero h2 {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 800;
     line-height: 1.1;
     color: var(--text);
     letter-spacing: -1px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 .hero h2 .highlight {
     background: linear-gradient(135deg, #ff69b4, #b8a9d4);
@@ -193,18 +193,18 @@ nav .badge {
     -webkit-text-fill-color: transparent;
 }
 .hero p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--muted);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 .btn-primary {
     display: inline-block;
     background: var(--text);
     color: #fff;
-    padding: 0.75rem 2.5rem;
+    padding: 0.6rem 2.2rem;
     border-radius: 99px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: all var(--transition);
     border: none;
@@ -220,7 +220,7 @@ nav .badge {
 .hero-carousel {
     width: 100%;
     height: 100%;
-    min-height: 380px;
+    min-height: 320px;
     overflow: hidden;
     position: relative;
     border-radius: var(--radius);
@@ -235,8 +235,8 @@ nav .badge {
 }
 .hero-carousel.horizontal .carousel-slide {
     flex: 0 0 25%;
-    padding: 1.5rem 1rem;
-    min-height: 200px;
+    padding: 1.25rem 1rem;
+    min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -249,18 +249,18 @@ nav .badge {
     border-right: none;
 }
 .hero-carousel.horizontal .fact-teaser .teaser-icon {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 .hero-carousel.horizontal .fact-teaser h4 {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
     color: var(--text);
 }
 .hero-carousel.horizontal .fact-teaser p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--muted);
 }
 @keyframes scrollHorizontal {
@@ -271,18 +271,23 @@ nav .badge {
     100% { transform: translateX(0%); }
 }
 
+/* Pause animation on hover */
+.hero-carousel.horizontal:hover {
+    animation-play-state: paused;
+}
+
 /* ===== STATS BAR ===== */
 .stats-bar {
     max-width: 1000px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 2rem auto;
     padding: 0 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
 }
 .stat-item {
     text-align: center;
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 0.75rem;
     background: var(--surface-solid);
     border-radius: var(--radius);
     border: 1px solid var(--border);
@@ -293,14 +298,16 @@ nav .badge {
     box-shadow: var(--shadow-lg);
 }
 .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     display: block;
     color: var(--text);
+    letter-spacing: -0.5px;
 }
 .stat-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--muted);
+    line-height: 1.3;
 }
 
 /* Photo Avatars in Stats Bar */
@@ -308,8 +315,8 @@ nav .badge {
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    padding: 0.5rem 0;
+    gap: 1.25rem;
+    padding: 0.25rem 0;
     border: none;
     background: transparent;
 }
@@ -317,11 +324,11 @@ nav .badge {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.2rem;
 }
 .photo-avatar img {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--border);
@@ -333,7 +340,7 @@ nav .badge {
     border-color: var(--primary);
 }
 .photo-avatar span {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: var(--muted);
     text-transform: lowercase;
     letter-spacing: 0.3px;
@@ -342,13 +349,13 @@ nav .badge {
 /* ===== FACTS ===== */
 .facts-section {
     max-width: 1200px;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 2.5rem auto;
     padding: 0 2rem;
 }
 .section-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 .section-title span {
     background: linear-gradient(135deg, #ff69b4, #b8a9d4);
@@ -357,53 +364,57 @@ nav .badge {
 }
 .facts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
 }
 .fact-card {
     background: var(--surface-solid);
     border-radius: var(--radius);
-    padding: 1.75rem;
+    padding: 1.5rem;
     border: 1px solid var(--border);
     transition: all var(--transition);
 }
 .fact-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     border-color: var(--primary);
     box-shadow: var(--shadow-lg);
 }
 .fact-card .icon {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 .fact-card h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 .fact-card p {
     color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.7;
+    font-size: 0.88rem;
+    line-height: 1.6;
 }
 .fact-card .source {
     display: block;
-    margin-top: 0.75rem;
-    font-size: 0.65rem;
+    margin-top: 0.6rem;
+    font-size: 0.6rem;
     color: var(--muted);
     opacity: 0.5;
 }
 
 /* ===== COUNTER ===== */
 .counter-section {
-    max-width: 600px;
-    margin: 0 auto 3rem auto;
-    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem auto;
+    padding: 1.5rem;
     text-align: center;
     background: var(--surface-solid);
     border-radius: var(--radius);
     border: 1px solid var(--border);
+}
+.counter-section p {
+    font-size: 0.95rem;
+    color: var(--muted);
 }
 .counter-section .btn-primary {
     margin-top: 0.5rem;
@@ -413,18 +424,18 @@ nav .badge {
 footer {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     text-align: center;
     border-top: 1px solid var(--border);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--muted);
     opacity: 0.6;
 }
 footer p:last-child {
     opacity: 0.15;
-    font-size: 0.55rem;
+    font-size: 0.5rem;
     letter-spacing: 0.5px;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
 }
 footer a {
     color: var(--muted);
@@ -434,13 +445,17 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
 @media (max-width: 992px) {
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 2rem 1rem;
-        gap: 2rem;
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        min-height: auto;
     }
     .hero-left {
         max-width: 100%;
@@ -449,113 +464,224 @@ footer a:hover {
         justify-content: center;
     }
     .hero h2 {
-        font-size: 2.4rem;
+        font-size: 2.2rem;
     }
     .hero-right {
         width: 100%;
-        min-height: 300px;
-        max-width: 400px;
+        min-height: 260px;
+        max-width: 420px;
         margin: 0 auto;
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 160px;
-        padding: 1rem;
-    }
-    .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 2rem;
-    }
-    .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.9rem;
-    }
-    .photo-avatar img {
-        width: 40px;
-        height: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    body { padding-top: 64px; }
-    .site-header { padding: 0 1rem; height: 64px; }
-    .logo h1 { font-size: 1rem; }
-    .logo span { font-size: 0.6rem; }
-    nav a { font-size: 0.8rem; }
-    .hero { padding: 1.5rem 1rem; gap: 1.5rem; min-height: auto; }
-    .hero h2 { font-size: 2rem; }
-    .hero-badges { flex-direction: column; align-items: center; gap: 0.5rem; }
-    .badge-stream, .badge-fan { font-size: 0.65rem; padding: 0.2rem 0.8rem; white-space: normal; }
-    .hero-right { min-height: 240px; max-width: 320px; }
-    .hero-carousel.horizontal .carousel-slide {
         min-height: 140px;
-        padding: 0.75rem;
+        padding: 1rem 0.75rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
     .photo-avatar img {
         width: 36px;
         height: 36px;
     }
-    .photo-avatar span {
-        font-size: 0.5rem;
-    }
-    .facts-grid {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        gap: 1rem;
-        padding: 0.5rem 0 1.5rem 0;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-    }
-    .fact-card {
-        flex: 0 0 85%;
-        scroll-snap-align: start;
-        min-width: 280px;
-        max-width: 320px;
-    }
-    .facts-grid::-webkit-scrollbar { height: 4px; }
-    .facts-grid::-webkit-scrollbar-track { background: var(--border); border-radius: 99px; }
-    .facts-grid::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 99px; }
-    .stats-bar {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
-        padding: 0 1rem;
-    }
-    .stat-item { padding: 1rem 0.5rem; }
-    .stat-number { font-size: 1.5rem; }
-    .photo-row {
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
 }
 
-@media (max-width: 480px) {
-    .hero h2 { font-size: 1.6rem; }
-    .hero p { font-size: 1rem; }
-    .btn-primary { padding: 0.6rem 1.8rem; font-size: 0.85rem; }
-    .hero-right { min-height: 200px; max-width: 260px; }
+@media (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+    .site-header {
+        padding: 0 1rem;
+        height: 56px;
+    }
+    .logo h1 {
+        font-size: 0.9rem;
+    }
+    .logo span {
+        font-size: 0.55rem;
+    }
+    nav a {
+        font-size: 0.75rem;
+    }
+    nav .badge {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.6rem;
+    }
+
+    .hero {
+        padding: 1rem 1rem 0.5rem 1rem;
+        gap: 1rem;
+    }
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    .btn-primary {
+        padding: 0.5rem 1.8rem;
+        font-size: 0.8rem;
+    }
+    .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+    }
+    .badge-stream,
+    .badge-fan {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.6rem;
+        white-space: normal;
+    }
+    .hero-right {
+        min-height: 180px;
+        max-width: 100%;
+    }
+    .hero-carousel {
+        min-height: 180px;
+    }
     .hero-carousel.horizontal .carousel-slide {
         min-height: 120px;
-        padding: 0.5rem;
+        padding: 0.75rem 0.5rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
         font-size: 1.4rem;
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
     .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.65rem;
+    }
+
+    /* Mobile horizontal scroll for facts */
+    .facts-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0.75rem;
+        padding: 0.25rem 0 1rem 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+    .fact-card {
+        flex: 0 0 75%;
+        scroll-snap-align: start;
+        min-width: 240px;
+        max-width: 280px;
+        padding: 1.25rem;
+    }
+    .facts-grid::-webkit-scrollbar {
+        height: 3px;
+    }
+    .facts-grid::-webkit-scrollbar-track {
+        background: var(--border);
+        border-radius: 99px;
+    }
+    .facts-grid::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 99px;
+    }
+
+    .stats-bar {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .stat-item {
+        padding: 0.75rem 0.5rem;
+    }
+    .stat-number {
+        font-size: 1.3rem;
+    }
+    .stat-label {
         font-size: 0.6rem;
     }
-    .badge-stream, .badge-fan { font-size: 0.55rem; padding: 0.15rem 0.6rem; }
+    .photo-row {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
     .photo-avatar img {
         width: 32px;
         height: 32px;
+    }
+    .photo-avatar span {
+        font-size: 0.5rem;
+    }
+
+    .counter-section {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+    .facts-section {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    .hero p {
+        font-size: 0.85rem;
+    }
+    .btn-primary {
+        padding: 0.4rem 1.5rem;
+        font-size: 0.75rem;
+    }
+    .badge-stream,
+    .badge-fan {
+        font-size: 0.5rem;
+        padding: 0.1rem 0.5rem;
+    }
+    .hero-right {
+        min-height: 150px;
+    }
+    .hero-carousel {
+        min-height: 150px;
+    }
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 100px;
+        padding: 0.5rem 0.4rem;
+    }
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1.2rem;
+    }
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.65rem;
+    }
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.55rem;
+    }
+    .fact-card {
+        flex: 0 0 70%;
+        min-width: 200px;
+        max-width: 240px;
+        padding: 1rem;
+    }
+    .stat-number {
+        font-size: 1.1rem;
+    }
+    .stat-label {
+        font-size: 0.55rem;
+    }
+    .photo-avatar img {
+        width: 28px;
+        height: 28px;
+    }
+    .counter-section p {
+        font-size: 0.8rem;
     }
 }
