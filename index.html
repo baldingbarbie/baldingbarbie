@@ -40,7 +40,7 @@
         "dateModified": "2026-08-28"
     }
     </script>
-    <link rel="stylesheet" href="style.css?v=0.12" />
+    <link rel="stylesheet" href="style.css?v=0.13" />
 </head>
 <body>
     <!-- JF Badge (preserved) -->
@@ -66,12 +66,21 @@
     <!-- Hero: Left Text + Right Auto-Scrolling Cards -->
     <section class="hero">
         <div class="hero-left">
-        <div class="avatar-grid">
-            <img src="assets/james1.webp" alt="james charles" class="avatar-grid-img" />
-            <img src="assets/james2.webp" alt="james charles" class="avatar-grid-img" />
-            <img src="assets/jeff1.webp" alt="jeffree star" class="avatar-grid-img" />
-            <img src="assets/jeff2.webp" alt="jeffree star" class="avatar-grid-img" />
+        <!-- Framing Avatars (absolute positioned around the text) -->
+        <div class="avatar-frame avatar-tl">
+            <img src="assets/jeff1.webp" alt="jeffree star" />
         </div>
+        <div class="avatar-frame avatar-tr">
+            <img src="assets/james1.webp" alt="james charles" />
+        </div>
+        <div class="avatar-frame avatar-bl">
+            <img src="assets/james2.webp" alt="james charles" />
+        </div>
+        <div class="avatar-frame avatar-br">
+            <img src="assets/jeff2.webp" alt="jeffree star" />
+        </div>
+
+        <!-- Content on top -->
         <div class="hero-content">
             <div class="hero-badges">
                 <span class="badge-stream">🎧 currently streaming: he loves me not – james charles · 47 plays</span>
@@ -84,6 +93,7 @@
             <p>No billionaire is ethical. Here's the documentation.</p>
             <a href="#facts" class="btn-primary">View the evidence ↓</a>
         </div>
+    </div>
     </div>
         <div class="hero-right">
             <div class="hero-carousel horizontal" id="heroCarousel">

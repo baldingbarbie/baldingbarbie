@@ -144,54 +144,74 @@ nav .badge {
     min-height: 50vh;
 }
 /* ===== HERO LEFT – AVATAR GRID BEHIND TEXT ===== */
+/* ===== HERO LEFT – FRAMING AVATARS ===== */
 .hero-left {
     flex: 1;
     max-width: 550px;
     position: relative;
+    padding: 2rem 0;
 }
 
-.avatar-grid {
+.avatar-frame {
     position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    width: 100%;
-    max-width: 340px;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.12;
+    opacity: 0.2;
+    transition: opacity 0.3s ease;
 }
-
-.avatar-grid-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+.avatar-frame:hover {
+    opacity: 0.4;
+}
+.avatar-frame img {
+    width: 140px;
+    height: 140px;
     object-fit: cover;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
-    transition: transform 0.3s ease;
-    filter: saturate(0.8) contrast(0.9) blur(1px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    display: block;
+    filter: saturate(0.85) contrast(0.95);
 }
 
-.avatar-grid-img:nth-child(1) {
-    transform: rotate(-3deg) scale(0.9);
+/* Positions */
+.avatar-tl {
+    top: -10px;
+    left: -30px;
+    transform: rotate(-8deg) scale(0.95);
 }
-.avatar-grid-img:nth-child(2) {
-    transform: rotate(4deg) scale(0.85);
+.avatar-tr {
+    top: -10px;
+    right: -30px;
+    transform: rotate(6deg) scale(0.9);
 }
-.avatar-grid-img:nth-child(3) {
-    transform: rotate(-1deg) scale(0.95);
+.avatar-bl {
+    bottom: -10px;
+    left: -30px;
+    transform: rotate(3deg) scale(0.92);
 }
-.avatar-grid-img:nth-child(4) {
-    transform: rotate(6deg) scale(0.88);
+.avatar-br {
+    bottom: -10px;
+    right: -30px;
+    transform: rotate(-5deg) scale(0.88);
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
 }
+
+/* Optional slow float animation */
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+    50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1deg)); }
+}
+.avatar-frame {
+    --rot: 0deg;
+    animation: floatSlow 6s ease-in-out infinite;
+}
+.avatar-tl { --rot: -8deg; animation-delay: 0s; }
+.avatar-tr { --rot: 6deg; animation-delay: 1.5s; }
+.avatar-bl { --rot: 3deg; animation-delay: 3s; }
+.avatar-br { --rot: -5deg; animation-delay: 4.5s; }
 
 .hero-right {
     flex: 1;
@@ -531,10 +551,11 @@ footer a:hover {
         gap: 1rem;
     }
 
-    .avatar-grid {
+    .avatar-frame {
         display: none;
     }
     .hero-left {
+        padding: 0;
         position: static;
     }
 
