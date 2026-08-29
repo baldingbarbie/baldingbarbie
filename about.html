@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About – Balding Barbie</title>
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="baldingbaddie" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg: #f8f6f4;
+            --text: #1a1a1a;
+            --muted: #555;
+            --light-muted: #888;
+            --primary: #ff69b4;
+            --primary-dim: rgba(255, 105, 180, 0.06);
+            --radius: 16px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 700px;
+            padding: 2.5rem;
+            background: #ffffff;
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 2px 32px rgba(0,0,0,0.04);
+        }
+        .container h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+        }
+        .container h1 span {
+            background: linear-gradient(135deg, #ff69b4, #b8a9d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .container .subtitle {
+            color: var(--light-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            padding-bottom: 1rem;
+        }
+        .container h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.5rem 0;
+            color: var(--text);
+        }
+        .container p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .container p strong {
+            color: var(--text);
+        }
+        .container .divider {
+            border: none;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            margin: 1.5rem 0;
+        }
+        .container .btn {
+            display: inline-block;
+            background: var(--text);
+            color: #fff;
+            padding: 0.7rem 2.5rem;
+            border-radius: 99px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            margin-top: 0.5rem;
+        }
+        .container .btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .container .small {
+            margin-top: 2rem;
+            font-size: 0.6rem;
+            color: var(--light-muted);
+            opacity: 0.3;
+            letter-spacing: 0.3px;
+        }
+        .container .small a {
+            color: var(--light-muted);
+            text-decoration: none;
+        }
+        .container .small a:hover {
+            text-decoration: underline;
+            opacity: 1;
+        }
+        .container .badge {
+            display: inline-block;
+            background: var(--primary-dim);
+            color: var(--primary);
+            padding: 0.15rem 0.8rem;
+            border-radius: 99px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255, 105, 180, 0.1);
+            margin-top: 0.25rem;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .container { padding: 1.5rem; }
+            .container h1 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>about <span>baldingbarbie.com</span></h1>
+        <div class="subtitle">
+            satirical commentary · independent project · not affiliated with anyone
+        </div>
+
+        <p>
+            <strong>This website is a satirical commentary project.</strong> It is not affiliated with,
+            endorsed by, or connected to Taylor Swift, her management, or any of her representatives.
+            All opinions expressed are those of the site's creator and are protected under
+            parody and fair use provisions.
+        </p>
+
+        <hr class="divider" />
+
+        <h2>disclaimer: i am not "balding barbie"</h2>
+        <p>
+            The persona "Balding Barbie" is a fictional character created for this satirical project.
+            <strong>I am not "Balding Barbie."</strong> The name, persona, and associated imagery are
+            part of a satirical commentary on celebrity culture, billionaire ethics, and online fandom.
+            Any resemblance to real individuals — including online personalities, trolls, or bullies —
+            is purely coincidental or satirical in nature.
+        </p>
+
+        <hr class="divider" />
+
+        <h2>context: online bullying</h2>
+        <p>
+            This project was created in response to documented patterns of online harassment and
+            bullying behavior exhibited by certain individuals in the Taylor Swift fandom community.
+            While this site focuses on Taylor Swift's documented controversies, it is also a commentary
+            on the toxic dynamics of online fandom, where personal attacks, doxxing, and harassment
+            are often directed at critics and dissenting voices.
+        </p>
+        <p>
+            The creator of this site does not condone harassment, doxxing, or any form of online abuse.
+            This project is intended as a <strong>satirical critique</strong>, not as a platform for
+            personal attacks against individuals.
+        </p>
+
+        <hr class="divider" />
+
+        <h2>sourcing & accuracy</h2>
+        <p>
+            All factual claims on this site are sourced from public records, journalism, and
+            nonprofit watchdog organizations. Citations are provided alongside each claim.
+            The opinions expressed are satirical and are not intended to be taken as factual
+            statements about Taylor Swift's character.
+        </p>
+
+        <hr class="divider" />
+
+        <h2>legal & ethical stance</h2>
+        <p>
+            This site operates within the bounds of <strong>fair use</strong> and
+            <strong>parody protection</strong> under U.S. copyright law. It is a non-commercial
+            project created for entertainment and commentary purposes. No trademark infringement
+            is intended. If you believe any content on this site violates your rights, please
+            contact the site owner directly.
+        </p>
+
+        <span class="badge">⚖️ parody · fair use · satire</span>
+
+        <div style="margin-top: 1.5rem;">
+            <a href="/" class="btn">back to the receipts</a>
+        </div>
+
+        <div class="small">
+            <a href="https://jeffbranches.com" target="_blank" rel="noopener noreferrer">made by jeff branches</a>
+        </div>
+    </div>
+</body>
+</html>
