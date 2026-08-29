@@ -143,7 +143,7 @@ nav .badge {
     gap: 2.5rem;
     min-height: 50vh;
 }
-/* ===== HERO LEFT – AVATAR GRID BEHIND TEXT ===== */
+
 /* ===== HERO LEFT – FRAMING AVATARS ===== */
 .hero-left {
     flex: 1;
@@ -156,11 +156,11 @@ nav .badge {
     position: absolute;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.2;
+    opacity: 0.4;
     transition: opacity 0.3s ease;
 }
 .avatar-frame:hover {
-    opacity: 0.4;
+    opacity: 0.6;
 }
 .avatar-frame img {
     width: 140px;
@@ -172,7 +172,6 @@ nav .badge {
     filter: saturate(0.85) contrast(0.95);
 }
 
-/* Positions */
 .avatar-tl {
     top: -10px;
     left: -30px;
@@ -199,7 +198,6 @@ nav .badge {
     z-index: 1;
 }
 
-/* Optional slow float animation */
 @keyframes floatSlow {
     0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
     50% { transform: translateY(-6px) rotate(calc(var(--rot, 0deg) + 1deg)); }
@@ -337,7 +335,6 @@ nav .badge {
     100% { transform: translateX(0%); }
 }
 
-/* Pause animation on hover */
 .hero-carousel.horizontal:hover {
     animation-play-state: paused;
 }
@@ -518,10 +515,6 @@ footer a:hover {
     .hero-carousel.horizontal .fact-teaser p {
         font-size: 0.75rem;
     }
-    .photo-avatar img {
-        width: 36px;
-        height: 36px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -602,7 +595,6 @@ footer a:hover {
         font-size: 0.65rem;
     }
 
-    /* Mobile horizontal scroll for facts */
     .facts-grid {
         display: flex;
         flex-wrap: nowrap;
@@ -645,17 +637,6 @@ footer a:hover {
     }
     .stat-label {
         font-size: 0.6rem;
-    }
-    .photo-row {
-        gap: 0.75rem;
-        flex-wrap: wrap;
-    }
-    .photo-avatar img {
-        width: 32px;
-        height: 32px;
-    }
-    .photo-avatar span {
-        font-size: 0.5rem;
     }
 
     .counter-section {
@@ -718,10 +699,6 @@ footer a:hover {
     }
     .stat-label {
         font-size: 0.55rem;
-    }
-    .photo-avatar img {
-        width: 28px;
-        height: 28px;
     }
     .counter-section p {
         font-size: 0.8rem;
