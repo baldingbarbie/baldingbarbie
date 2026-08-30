@@ -78,7 +78,7 @@ const API_KEY = 'swiftie-tears';
     setInterval(fetchTears, 60000);
 
     // ============================================================
-    // FLYING PLANE WITH RANDOM FLIGHT PATH + DOTTED TRAIL
+    // FLYING PLANE WITH DOTTED TRAIL
     // ============================================================
     (function() {
         if (window.innerWidth < 768) return;
@@ -90,9 +90,9 @@ const API_KEY = 'swiftie-tears';
         container.style.cssText = `
             grid-column: 1 / -1;
             position: relative;
-            height: 100px;
+            height: 60px;
             overflow: visible;
-            margin-top: -1.5rem;
+            margin-top: -0.75rem;
             margin-bottom: 0.25rem;
             pointer-events: none;
             user-select: none;
@@ -100,9 +100,10 @@ const API_KEY = 'swiftie-tears';
         `;
         statsBar.appendChild(container);
 
+        // SVG layer for dots
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('width', '100%');
-        svg.setAttribute('height', '100');
+        svg.setAttribute('height', '60');
         svg.style.cssText = `
             position: absolute;
             top: 0;
@@ -113,19 +114,20 @@ const API_KEY = 'swiftie-tears';
         `;
         container.appendChild(svg);
 
-        const trailGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-        svg.appendChild(trailGroup);
+        const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        svg.appendChild(dotsGroup);
 
+        // Plane
         const plane = document.createElement('div');
         plane.textContent = '✈️';
         plane.style.cssText = `
             position: absolute;
             top: 50%;
-            left: -50px;
-            font-size: 1.8rem;
+            left: -40px;
+            font-size: 1.6rem;
             line-height: 1;
             transform: translateY(-50%) rotate(0deg);
-            filter: drop-shadow(0 2px 12px rgba(255, 105, 180, 0.25));
+            filter: drop-shadow(0 2px 12px rgba(255, 105, 180, 0.2));
             will-change: transform, left, top, opacity;
             opacity: 0;
             z-index: 2;
@@ -133,175 +135,66 @@ const API_KEY = 'swiftie-tears';
         container.appendChild(plane);
 
         let startTime = null;
-        const baseDuration = 10000;
-        let duration = baseDuration;
+        const duration = 8000;
         let dots = [];
-        let currentPath = {};
-
-        function generatePath() {
-            const rect = container.getBoundingClientRect();
-            const width = rect.width || 800;
-            const height = 100;
-
-            const loops = Math.floor(Math.random() * 3) + 1;
-            const entry = Math.random() > 0.5 ? 'left' : 'right';
-            const exit = entry === 'left' ? 'right' : 'left';
-            const speedVariation = 0.9 + Math.random() * 0.2;
-
-            const loopData = [];
-            for (let i = 0; i < loops; i++) {
-                const size = 50 + Math.random() * 85;
-                const dir = Math.random() > 0.5 ? 1 : -1;
-                const offsetX = (i + 1) / (loops + 1);
-                loopData.push({ size, dir, offsetX });
-            }
-
-            return {
-                loops: loops,
-                entry: entry,
-                exit: exit,
-                speedVariation: speedVariation,
-                loopData: loopData,
-                width: width,
-                height: height,
-                trail: []
-            };
-        }
-
-        function getPosition(progress, path) {
-            const { width, height, loopData, entry } = path;
-            const startX = entry === 'left' ? -60 : width + 60;
-            const endX = entry === 'left' ? width + 60 : -60;
-            const totalProgress = progress;
-
-            let x, y, rotation = 0;
-
-            if (loopData.length === 0) {
-                const eased = totalProgress < 0.5
-                    ? 2 * totalProgress * totalProgress
-                    : 1 - Math.pow(-2 * totalProgress + 2, 2) / 2;
-                x = startX + eased * (endX - startX);
-                y = height / 2 + Math.sin(totalProgress * Math.PI * 2 * 1.5) * 15;
-                rotation = Math.sin(totalProgress * Math.PI * 2 * 1.5) * 8;
-                return { x, y, rotation };
-            }
-
-            let loopProgress = totalProgress * (loopData.length + 1);
-            let loopIndex = Math.floor(loopProgress);
-            let localProgress = loopProgress - loopIndex;
-
-            if (loopIndex < 0) loopIndex = 0;
-            if (loopIndex > loopData.length) loopIndex = loopData.length;
-
-            if (loopIndex === 0) {
-                const eased = localProgress < 0.5
-                    ? 2 * localProgress * localProgress
-                    : 1 - Math.pow(-2 * localProgress + 2, 2) / 2;
-                const startOffset = entry === 'left' ? 0 : width;
-                const endOffset = entry === 'left' ? width * 0.15 : width * 0.85;
-                x = startX + eased * (endOffset - startX);
-                y = height / 2 + Math.sin(localProgress * Math.PI * 2 * 0.5) * 10;
-                rotation = Math.sin(localProgress * Math.PI * 2 * 0.5) * 6;
-                return { x, y, rotation };
-            }
-
-            if (loopIndex === loopData.length) {
-                const eased = localProgress < 0.5
-                    ? 2 * localProgress * localProgress
-                    : 1 - Math.pow(-2 * localProgress + 2, 2) / 2;
-                const startOffset = entry === 'left' ? width * 0.85 : width * 0.15;
-                x = startOffset + eased * (endX - startOffset);
-                y = height / 2 + Math.sin(localProgress * Math.PI * 2 * 0.5) * 10;
-                rotation = Math.sin(localProgress * Math.PI * 2 * 0.5) * 6;
-                return { x, y, rotation };
-            }
-
-            const loop = loopData[loopIndex - 1];
-            const loopStart = (loopIndex - 1) / (loopData.length + 1);
-            const loopEnd = loopIndex / (loopData.length + 1);
-            const loopLength = loopEnd - loopStart;
-            const loopPos = (totalProgress - loopStart) / loopLength;
-
-            const loopProgressEased = loopPos < 0.5
-                ? 2 * loopPos * loopPos
-                : 1 - Math.pow(-2 * loopPos + 2, 2) / 2;
-
-            const centerX = width * 0.15 + (loopIndex - 1) * (width * 0.7 / (loopData.length - 0.5));
-            const centerY = height / 2;
-
-            const angle = loopProgressEased * Math.PI * 2 * loop.dir;
-            const loopSize = loop.size;
-
-            x = centerX + Math.sin(angle) * loopSize;
-            y = centerY - Math.cos(angle) * loopSize * 0.6;
-
-            rotation = Math.sin(angle) * 25 * loop.dir;
-
-            return { x, y, rotation };
-        }
 
         function animate(time) {
-            if (!startTime) {
-                startTime = time;
-                currentPath = generatePath();
-                duration = baseDuration * currentPath.speedVariation;
-                dots = [];
-            }
-
+            if (!startTime) startTime = time;
             const elapsed = (time - startTime) % duration;
             const progress = elapsed / duration;
 
-            const pos = getPosition(progress, currentPath);
+            const eased = progress < 0.5
+                ? 2 * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
             const rect = container.getBoundingClientRect();
             const width = rect.width || 800;
 
-            let x = pos.x;
-            let y = pos.y;
+            const x = -40 + eased * (width + 80);
+            const waveAmplitude = 12;
+            const waveFrequency = 1.8;
+            const y = 30 + Math.sin(progress * Math.PI * 2 * waveFrequency) * waveAmplitude;
+            const rotation = Math.cos(progress * Math.PI * 2 * waveFrequency) * 8;
 
-            if (x < -100 || x > width + 100) {
-                const fadeProgress = Math.abs(x + 60) / 100;
-                plane.style.opacity = Math.max(0, 1 - fadeProgress * 0.3);
-            } else {
-                const fadeIn = Math.min(1, (x + 60) / 100);
-                const fadeOut = Math.min(1, (width + 60 - x) / 100);
-                plane.style.opacity = Math.min(fadeIn, fadeOut, 1);
+            const fadeStart = 0.05;
+            const fadeEnd = 0.95;
+            let opacity = 1;
+            if (progress < fadeStart) {
+                opacity = progress / fadeStart;
+            } else if (progress > fadeEnd) {
+                opacity = 1 - (progress - fadeEnd) / (1 - fadeEnd);
             }
+            opacity = Math.max(0, Math.min(1, opacity));
 
             plane.style.left = `${x}px`;
             plane.style.top = `${y}px`;
-            plane.style.transform = `translateY(-50%) rotate(${pos.rotation}deg)`;
+            plane.style.transform = `translateY(-50%) rotate(${rotation}deg)`;
+            plane.style.opacity = opacity;
 
-            dots.push({
-                x: x,
-                y: y,
-                created: time,
-                opacity: 1,
-                size: 3 + Math.random() * 2
-            });
-
-            if (dots.length > 40) {
-                dots.shift();
+            // Add a dot every ~2 frames (creates 5-7 visible dots)
+            if (Math.random() < 0.5) {
+                dots.push({
+                    x: x,
+                    y: y,
+                    created: time,
+                    opacity: 1
+                });
             }
 
+            // Keep only recent dots (fade out over 2.5 seconds)
             dots = dots.filter(d => {
                 const age = (time - d.created) / 1000;
                 d.opacity = Math.max(0, 1 - age / 2.5);
                 return d.opacity > 0.01;
             });
 
-            const dotGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            // Render dots
+            let dotElements = '';
             dots.forEach(d => {
-                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                circle.setAttribute('cx', String(d.x));
-                circle.setAttribute('cy', String(d.y));
-                circle.setAttribute('r', String(d.size));
-                circle.setAttribute('fill', 'rgba(255, 105, 180, 0.6)');
-                circle.setAttribute('opacity', String(d.opacity));
-                dotGroup.appendChild(circle);
+                const dotSize = 3 + (1 - d.opacity) * 2;
+                dotElements += `<circle cx="${d.x}" cy="${d.y}" r="${dotSize}" fill="rgba(255, 105, 180, 0.5)" opacity="${d.opacity}"/>`;
             });
-
-            trailGroup.innerHTML = '';
-            trailGroup.appendChild(dotGroup);
+            dotsGroup.innerHTML = dotElements;
 
             requestAnimationFrame(animate);
         }
@@ -313,9 +206,8 @@ const API_KEY = 'swiftie-tears';
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 startTime = null;
-                currentPath = generatePath();
                 dots = [];
-            }, 300);
+            }, 200);
         });
     })();
 
