@@ -1,5 +1,5 @@
-const API_NAMESPACE = import.meta.env.VITE_API_NAMESPACE;
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_NAMESPACE = 'baldingbarbie';
+const API_KEY = 'swiftie-tears';
 
 (function() {
     function updateDisplay(count) {
@@ -77,7 +77,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
     setInterval(fetchTears, 60000);
 
-    // Flying plane (unchanged)
+    // Flying plane
     (function() {
         if (window.innerWidth < 768) return;
 
