@@ -326,30 +326,6 @@ nav .badge {
     font-size: 0.7rem;
     color: var(--muted);
 }
-
-.teaser-icon {
-    display: inline-block;
-    position: relative;
-    font-size: 1.8rem;
-    line-height: 1;
-    width: 1.8rem;
-    height: 1.8rem;
-    text-align: center;
-}
-.teaser-icon .under {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 1.4rem;
-    opacity: 0.5;
-    z-index: 0;
-    transform: translate(2px, 2px);
-}
-.teaser-icon > :first-child {
-    position: relative;
-    z-index: 1;
-}
-
 @keyframes scrollHorizontal {
     0%, 20% { transform: translateX(0%); }
     25%, 45% { transform: translateX(-25%); }
@@ -360,6 +336,30 @@ nav .badge {
 
 .hero-carousel.horizontal:hover {
     animation-play-state: paused;
+}
+
+/* ===== STACKED EMOJIS (OVERLAP) ===== */
+.stacked-icon {
+    display: inline-block;
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+    line-height: 1.8rem;
+    font-size: 1.8rem;
+}
+.stacked-icon .top-emoji {
+    position: relative;
+    z-index: 2;
+}
+.stacked-icon .bottom-emoji {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    font-size: 1.6rem;
+    opacity: 0.45;
+    transform: translate(2px, 2px);
 }
 
 /* ===== STATS BAR ===== */
@@ -440,28 +440,14 @@ nav .badge {
     display: block;
     margin-bottom: 0.4rem;
 }
-
-.icon-overlay {
-    display: inline-block;
-    position: relative;
+.fact-card .icon.stacked-icon {
     font-size: 1.6rem;
-    line-height: 1;
     width: 1.6rem;
     height: 1.6rem;
-    text-align: center;
+    line-height: 1.6rem;
 }
-.icon-overlay .under {
-    position: absolute;
-    top: 0;
-    left: 0;
+.fact-card .icon.stacked-icon .bottom-emoji {
     font-size: 1.4rem;
-    opacity: 0.5;
-    z-index: 0;
-    transform: translate(2px, 2px);
-}
-.icon-overlay > :first-child {
-    position: relative;
-    z-index: 1;
 }
 
 .fact-card h3 {
@@ -788,5 +774,27 @@ footer a:hover {
     .spin-wheel {
         width: 90px;
         height: 90px;
+    }
+}
+
+/* ===== STACKED EMOJI RESPONSIVE TWEAKS ===== */
+@media (max-width: 768px) {
+    .stacked-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        font-size: 1.2rem;
+    }
+    .stacked-icon .bottom-emoji {
+        font-size: 1rem;
+    }
+    .fact-card .icon.stacked-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        font-size: 1.2rem;
+    }
+    .fact-card .icon.stacked-icon .bottom-emoji {
+        font-size: 1rem;
     }
 }
