@@ -88,7 +88,6 @@ const API_KEY = 'swiftie-tears';
         function update(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             const current = start + (target - start) * eased;
             
@@ -107,7 +106,6 @@ const API_KEY = 'swiftie-tears';
         requestAnimationFrame(update);
     }
 
-    // Animate all stat numbers with data-target attribute
     document.querySelectorAll('.stat-number[data-target]').forEach(el => {
         const target = parseFloat(el.dataset.target);
         const prefix = el.dataset.prefix || '';
@@ -118,7 +116,92 @@ const API_KEY = 'swiftie-tears';
     });
 
     // ============================================================
-    // FLYING PLANE WITH DOTTED TRAIL (preserved from original)
+    // CHARITY WATCH SPINNER
+    // ============================================================
+    let spinAngle = 0;
+    window.spinWheel = function() {
+        const wheel = document.getElementById('spinWheel');
+        const resultDisplay = document.getElementById('spinResult');
+        if (!wheel) return;
+
+        const extra = 720 + Math.random() * 720;
+        spinAngle += extra;
+        wheel.style.transform = `rotate(${spinAngle}deg)`;
+
+        const rand = Math.random();
+        let score;
+        if (rand < 0.60) {
+            score = (0.05 + Math.random() * 0.15).toFixed(2);
+        } else if (rand < 0.85) {
+            score = (0.20 + Math.random() * 0.30).toFixed(2);
+        } else if (rand < 0.95) {
+            score = (0.50 + Math.random() * 0.30).toFixed(2);
+        } else {
+            score = (0.80 + Math.random() * 0.20).toFixed(2);
+        }
+
+        setTimeout(() => {
+            if (resultDisplay) {
+                resultDisplay.textContent = score;
+                resultDisplay.style.color = parseFloat(score) < 0.20 ? '#ff69b4' : '#666';
+            }
+            if (parseFloat(score) > 0.70) {
+                spawnConfetti(80);
+            }
+        }, 2100);
+    };
+
+    // ============================================================
+    // CONFETTI 
+    // ============================================================
+    function spawnConfetti(count) {
+        const canvas = document.getElementById('confettiCanvas') || (() => {
+            const c = document.createElement('canvas');
+            c.id = 'confettiCanvas';
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+            c.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+            document.body.appendChild(c);
+            return c;
+        })();
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        const colors = ['#ff69b4', '#b8a9d4', '#ffffff', '#ffb3ba', '#ffdfba'];
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: -10,
+                vx: (Math.random() - 0.5) * 6,
+                vy: Math.random() * 4 + 2,
+                size: Math.random() * 6 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                life: 1,
+                decay: 0.005 + Math.random() * 0.01
+            });
+        }
+        let frame = 0;
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let alive = false;
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.05;
+                p.life -= p.decay;
+                if (p.life > 0) { alive = true;
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(p.x, p.y, p.size, p.size * 0.6); }
+            });
+            ctx.globalAlpha = 1;
+            if (alive && frame < 300) { requestAnimationFrame(animate);
+                frame++; } else { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+        }
+        animate();
+    }
+
+    // ============================================================
+    // FLYING PLANE WITH DOTTED TRAIL
     // ============================================================
     (function() {
         if (window.innerWidth < 768) return;
@@ -247,7 +330,7 @@ const API_KEY = 'swiftie-tears';
     })();
 
     // ============================================================
-    // JET EMISSIONS COUNTER (preserved from original)
+    // JET EMISSIONS COUNTER
     // ============================================================
     (function() {
         if (window.innerWidth < 768) return;
@@ -301,4 +384,23 @@ const API_KEY = 'swiftie-tears';
         wrapper.innerHTML = jetHTML;
         statsBar.appendChild(wrapper);
     })();
+
+    // ============================================================
+    // STREAMING BADGE ROTATOR
+    // ============================================================
+    const FAKE_USERS = ['swiftie_killer_87','gay_for_jeffree','haters_gona_hate_42','eternal_snake','karma_is_god','balding_baddie','faux_activism','chart_manipulator','jet_fuel_cant_melt','vinyl_hoarder','tay_swift_police','meltdown_maven'];
+    const streamingBadge = document.getElementById('streamingBadge');
+
+    function rotateStreaming() {
+        const songs = ['he loves me not – james charles', 'jeffree star – queen of the gays', 'balding anthem – remix', 'karma is my boyfriend', 'snake jazz', 'vinyl tears'];
+        const plays = Math.floor(Math.random() * 1000) + 10;
+        const user = FAKE_USERS[Math.floor(Math.random() * FAKE_USERS.length)];
+        const song = songs[Math.floor(Math.random() * songs.length)];
+        if (streamingBadge) {
+            streamingBadge.textContent = `🎧 currently streaming: ${song} · ${user} · ${plays} plays`;
+        }
+    }
+    setInterval(rotateStreaming, 12000);
+    rotateStreaming();
+
 })();

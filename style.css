@@ -144,7 +144,6 @@ nav .badge {
     min-height: 50vh;
 }
 
-/* ===== HERO LEFT – FRAMING AVATARS ===== */
 .hero-left {
     flex: 1;
     max-width: 550px;
@@ -280,7 +279,7 @@ nav .badge {
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* Hero Carousel – Horizontal Auto-Scrolling Fact Teasers */
+/* ===== CAROUSEL — COMPACT ===== */
 .hero-carousel {
     width: 100%;
     height: 100%;
@@ -299,8 +298,8 @@ nav .badge {
 }
 .hero-carousel.horizontal .carousel-slide {
     flex: 0 0 25%;
-    padding: 1rem 0.75rem;  /* was 1.25rem 1rem — reduced */
-    min-height: 140px;      /* was 180px — reduced */
+    padding: 1rem 0.75rem;
+    min-height: 140px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -313,18 +312,18 @@ nav .badge {
     border-right: none;
 }
 .hero-carousel.horizontal .fact-teaser .teaser-icon {
-    font-size: 1.8rem;      /* was 2.2rem — reduced */
+    font-size: 1.8rem;
     display: block;
-    margin-bottom: 0.2rem;  /* was 0.4rem — reduced */
+    margin-bottom: 0.2rem;
 }
 .hero-carousel.horizontal .fact-teaser h4 {
-    font-size: 0.85rem;     /* was 0.95rem — reduced */
+    font-size: 0.85rem;
     font-weight: 600;
-    margin-bottom: 0.1rem;  /* was 0.2rem — reduced */
+    margin-bottom: 0.1rem;
     color: var(--text);
 }
 .hero-carousel.horizontal .fact-teaser p {
-    font-size: 0.7rem;      /* was 0.8rem — reduced */
+    font-size: 0.7rem;
     color: var(--muted);
 }
 @keyframes scrollHorizontal {
@@ -377,7 +376,7 @@ nav .badge {
     line-height: 1.3;
 }
 
-/* ===== FACTS ===== */
+/* ===== FACTS GRID ===== */
 .facts-section {
     max-width: 1200px;
     margin: 0 auto 2.5rem auto;
@@ -393,11 +392,13 @@ nav .badge {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 .facts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
 }
+
 .fact-card {
     background: var(--surface-solid);
     border-radius: var(--radius);
@@ -433,7 +434,7 @@ nav .badge {
     opacity: 0.5;
 }
 
-/* ===== COUNTER ===== */
+/* ===== COUNTER + SPINNER ===== */
 .counter-section {
     max-width: 500px;
     margin: 0 auto 2.5rem auto;
@@ -449,6 +450,33 @@ nav .badge {
 }
 .counter-section .btn-primary {
     margin-top: 0.5rem;
+}
+
+.spin-wheel {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0.5rem auto;
+    transition: transform 2s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    cursor: pointer;
+    border: 3px solid var(--text);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    background: conic-gradient(
+        #ff69b4 0% 10%,
+        #b8a9d4 10% 20%,
+        #ff69b4 20% 30%,
+        #b8a9d4 30% 40%,
+        #ff69b4 40% 50%,
+        #b8a9d4 50% 60%,
+        #ff69b4 60% 70%,
+        #b8a9d4 70% 80%,
+        #ff69b4 80% 90%,
+        #b8a9d4 90% 100%
+    );
+}
+.spin-wheel:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255,105,180,0.3);
 }
 
 /* ===== FOOTER ===== */
@@ -499,22 +527,26 @@ footer a:hover {
     }
     .hero-right {
         width: 100%;
-        min-height: 200px;   /* was 260px — reduced */
+        min-height: 200px;
         max-width: 420px;
         margin: 0 auto;
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 110px;   /* was 140px — reduced */
+        min-height: 110px;
         padding: 0.75rem 0.5rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.5rem;   /* was 1.8rem — reduced */
+        font-size: 1.5rem;
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.75rem;  /* was 0.85rem — reduced */
+        font-size: 0.75rem;
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.65rem;  /* was 0.75rem — reduced */
+        font-size: 0.65rem;
+    }
+
+    .facts-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -576,24 +608,24 @@ footer a:hover {
         white-space: normal;
     }
     .hero-right {
-        min-height: 140px;   /* was 180px — reduced */
+        min-height: 140px;
         max-width: 100%;
     }
     .hero-carousel {
-        min-height: 140px;   /* was 180px — reduced */
+        min-height: 140px;
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 90px;    /* was 120px — reduced */
+        min-height: 90px;
         padding: 0.5rem 0.3rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.2rem;   /* was 1.4rem — reduced */
+        font-size: 1.2rem;
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.65rem;  /* was 0.75rem — reduced */
+        font-size: 0.65rem;
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.55rem;  /* was 0.65rem — reduced */
+        font-size: 0.55rem;
     }
 
     .facts-grid {
@@ -606,10 +638,10 @@ footer a:hover {
         -webkit-overflow-scrolling: touch;
     }
     .fact-card {
-        flex: 0 0 75%;
+        flex: 0 0 85%;
         scroll-snap-align: start;
-        min-width: 240px;
-        max-width: 280px;
+        min-width: 280px;
+        max-width: 340px;
         padding: 1.25rem;
     }
     .facts-grid::-webkit-scrollbar {
@@ -672,28 +704,28 @@ footer a:hover {
         padding: 0.1rem 0.5rem;
     }
     .hero-right {
-        min-height: 110px;   /* was 150px — reduced */
+        min-height: 110px;
     }
     .hero-carousel {
-        min-height: 110px;   /* was 150px — reduced */
+        min-height: 110px;
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 70px;    /* was 100px — reduced */
+        min-height: 70px;
         padding: 0.4rem 0.2rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1rem;     /* was 1.2rem — reduced */
+        font-size: 1rem;
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.55rem;  /* was 0.65rem — reduced */
+        font-size: 0.55rem;
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.5rem;   /* was 0.55rem — reduced */
+        font-size: 0.5rem;
     }
     .fact-card {
-        flex: 0 0 70%;
-        min-width: 200px;
-        max-width: 240px;
+        flex: 0 0 85%;
+        min-width: 250px;
+        max-width: 300px;
         padding: 1rem;
     }
     .stat-number {
@@ -704,5 +736,9 @@ footer a:hover {
     }
     .counter-section p {
         font-size: 0.8rem;
+    }
+    .spin-wheel {
+        width: 90px;
+        height: 90px;
     }
 }
