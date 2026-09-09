@@ -326,6 +326,30 @@ nav .badge {
     font-size: 0.7rem;
     color: var(--muted);
 }
+
+.teaser-icon {
+    display: inline-block;
+    position: relative;
+    font-size: 1.8rem;
+    line-height: 1;
+    width: 1.8rem;
+    height: 1.8rem;
+    text-align: center;
+}
+.teaser-icon .under {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.4rem;
+    opacity: 0.5;
+    z-index: 0;
+    transform: translate(2px, 2px);
+}
+.teaser-icon > :first-child {
+    position: relative;
+    z-index: 1;
+}
+
 @keyframes scrollHorizontal {
     0%, 20% { transform: translateX(0%); }
     25%, 45% { transform: translateX(-25%); }
@@ -416,6 +440,30 @@ nav .badge {
     display: block;
     margin-bottom: 0.4rem;
 }
+
+.icon-overlay {
+    display: inline-block;
+    position: relative;
+    font-size: 1.6rem;
+    line-height: 1;
+    width: 1.6rem;
+    height: 1.6rem;
+    text-align: center;
+}
+.icon-overlay .under {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.4rem;
+    opacity: 0.5;
+    z-index: 0;
+    transform: translate(2px, 2px);
+}
+.icon-overlay > :first-child {
+    position: relative;
+    z-index: 1;
+}
+
 .fact-card h3 {
     font-size: 1rem;
     font-weight: 600;
