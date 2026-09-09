@@ -299,8 +299,8 @@ nav .badge {
 }
 .hero-carousel.horizontal .carousel-slide {
     flex: 0 0 25%;
-    padding: 1.25rem 1rem;
-    min-height: 180px;
+    padding: 1rem 0.75rem;  /* was 1.25rem 1rem — reduced */
+    min-height: 140px;      /* was 180px — reduced */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -313,18 +313,18 @@ nav .badge {
     border-right: none;
 }
 .hero-carousel.horizontal .fact-teaser .teaser-icon {
-    font-size: 2.2rem;
+    font-size: 1.8rem;      /* was 2.2rem — reduced */
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.2rem;  /* was 0.4rem — reduced */
 }
 .hero-carousel.horizontal .fact-teaser h4 {
-    font-size: 0.95rem;
+    font-size: 0.85rem;     /* was 0.95rem — reduced */
     font-weight: 600;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;  /* was 0.2rem — reduced */
     color: var(--text);
 }
 .hero-carousel.horizontal .fact-teaser p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;      /* was 0.8rem — reduced */
     color: var(--muted);
 }
 @keyframes scrollHorizontal {
@@ -369,6 +369,7 @@ nav .badge {
     display: block;
     color: var(--text);
     letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
 }
 .stat-label {
     font-size: 0.65rem;
@@ -498,22 +499,22 @@ footer a:hover {
     }
     .hero-right {
         width: 100%;
-        min-height: 260px;
+        min-height: 200px;   /* was 260px — reduced */
         max-width: 420px;
         margin: 0 auto;
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 140px;
-        padding: 1rem 0.75rem;
+        min-height: 110px;   /* was 140px — reduced */
+        padding: 0.75rem 0.5rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.8rem;
+        font-size: 1.5rem;   /* was 1.8rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.85rem;
+        font-size: 0.75rem;  /* was 0.85rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.75rem;
+        font-size: 0.65rem;  /* was 0.75rem — reduced */
     }
 }
 
@@ -575,24 +576,24 @@ footer a:hover {
         white-space: normal;
     }
     .hero-right {
-        min-height: 180px;
+        min-height: 140px;   /* was 180px — reduced */
         max-width: 100%;
     }
     .hero-carousel {
-        min-height: 180px;
+        min-height: 140px;   /* was 180px — reduced */
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 120px;
-        padding: 0.75rem 0.5rem;
+        min-height: 90px;    /* was 120px — reduced */
+        padding: 0.5rem 0.3rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.4rem;
+        font-size: 1.2rem;   /* was 1.4rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.75rem;
+        font-size: 0.65rem;  /* was 0.75rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.65rem;
+        font-size: 0.55rem;  /* was 0.65rem — reduced */
     }
 
     .facts-grid {
@@ -671,23 +672,23 @@ footer a:hover {
         padding: 0.1rem 0.5rem;
     }
     .hero-right {
-        min-height: 150px;
+        min-height: 110px;   /* was 150px — reduced */
     }
     .hero-carousel {
-        min-height: 150px;
+        min-height: 110px;   /* was 150px — reduced */
     }
     .hero-carousel.horizontal .carousel-slide {
-        min-height: 100px;
-        padding: 0.5rem 0.4rem;
+        min-height: 70px;    /* was 100px — reduced */
+        padding: 0.4rem 0.2rem;
     }
     .hero-carousel.horizontal .fact-teaser .teaser-icon {
-        font-size: 1.2rem;
+        font-size: 1rem;     /* was 1.2rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser h4 {
-        font-size: 0.65rem;
+        font-size: 0.55rem;  /* was 0.65rem — reduced */
     }
     .hero-carousel.horizontal .fact-teaser p {
-        font-size: 0.55rem;
+        font-size: 0.5rem;   /* was 0.55rem — reduced */
     }
     .fact-card {
         flex: 0 0 70%;

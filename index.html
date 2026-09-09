@@ -40,10 +40,10 @@
         "dateModified": "2026-08-28"
     }
     </script>
-    <link rel="stylesheet" href="style.css?v=0.13" />
+    <link rel="stylesheet" href="style.css?v=0.17" />
 </head>
 <body>
-    <!-- JF Badge (preserved) -->
+    <!-- JF Badge -->
     <a href="https://jeffbraches.com" target="_blank" rel="noopener noreferrer" class="jf-badge">
         <span class="jf-box">Made by Jeff Braches</span>
     </a>
@@ -63,38 +63,31 @@
         </div>
     </header>
 
-    <!-- Hero: Left Text + Right Auto-Scrolling Cards -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-left">
-        <!-- Framing Avatars (absolute positioned around the text) -->
-        <div class="avatar-frame avatar-tl">
-            <img src="assets/jeff1.webp" alt="jeffree star" />
-        </div>
-        <div class="avatar-frame avatar-tr">
-            <img src="assets/james1.webp" alt="james charles" />
-        </div>
-        <div class="avatar-frame avatar-bl">
-            <img src="assets/james2.webp" alt="james charles" />
-        </div>
-        <div class="avatar-frame avatar-br">
-            <img src="assets/jeff2.webp" alt="jeffree star" />
-        </div>
-
-        <!-- Content on top -->
-        <div class="hero-content">
-            <div class="hero-badges">
-                <span class="badge-stream">🎧 currently streaming: he loves me not – james charles · 47 plays</span>
-                <span class="badge-fan">💄 jeffree star · top 0.1% gifter on TikTok Live</span>
+            <div class="avatar-frame avatar-tl">
+                <img src="assets/jeff1.webp" alt="jeffree star" loading="lazy" />
             </div>
-            <h2>
-                i am baldingbarbie<br />
-                <span class="highlight">this is how i really feel</span>
-            </h2>
-            <p>No billionaire is ethical. Here's the documentation.</p>
-            <a href="#facts" class="btn-primary">View the evidence ↓</a>
+            <div class="avatar-frame avatar-tr">
+                <img src="assets/james1.webp" alt="james charles" loading="lazy" />
+            </div>
+            <div class="avatar-frame avatar-bl">
+                <img src="assets/james2.webp" alt="james charles" loading="lazy" />
+            </div>
+            <div class="avatar-frame avatar-br">
+                <img src="assets/jeff2.webp" alt="jeffree star" loading="lazy" />
+            </div>
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <span class="badge-stream">🎧 currently streaming: he loves me not – james charles · 47 plays</span>
+                    <span class="badge-fan">💄 jeffree star · top 0.1% gifter on TikTok Live</span>
+                </div>
+                <h2>i am baldingbarbie<br /><span class="highlight">this is how i really feel</span></h2>
+                <p>No billionaire is ethical. Here's the documentation.</p>
+                <a href="#facts" class="btn-primary">View the evidence ↓</a>
+            </div>
         </div>
-    </div>
-    </div>
         <div class="hero-right">
             <div class="hero-carousel horizontal" id="heroCarousel">
                 <div class="carousel-slide fact-teaser">
@@ -124,15 +117,15 @@
     <!-- Stats Bar -->
     <section class="stats-bar">
         <div class="stat-item">
-            <span class="stat-number">$452B</span>
+            <span class="stat-number" data-target="452.9" data-suffix="B">0</span>
             <span class="stat-label">ICE contract value (Amentum)</span>
         </div>
         <div class="stat-item">
-            <span class="stat-number">$26M</span>
+            <span class="stat-number" data-target="26" data-prefix="$" data-suffix="M">0</span>
             <span class="stat-label">donation — zero LGBT+ charities</span>
         </div>
         <div class="stat-item">
-            <span class="stat-number">138</span>
+            <span class="stat-number" data-target="138" data-suffix=" tons">0</span>
             <span class="stat-label">tons CO₂ from private jets (2024)</span>
         </div>
         <div class="stat-item">
@@ -141,7 +134,7 @@
         </div>
     </section>
 
-    <!-- Facts Grid (Horizontal scroll on mobile, grid on desktop) -->
+    <!-- Facts Grid -->
     <section class="facts-section" id="facts">
         <h2 class="section-title">Facts <span>that matter</span></h2>
         <div class="facts-grid">
@@ -236,6 +229,6 @@
         </p>
     </footer>
 
-    <script src="script.js?v=0.15"></script>
+    <script src="script.js?v=0.17"></script>
 </body>
 </html>

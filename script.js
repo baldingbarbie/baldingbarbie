@@ -78,7 +78,47 @@ const API_KEY = 'swiftie-tears';
     setInterval(fetchTears, 60000);
 
     // ============================================================
-    // FLYING PLANE WITH DOTTED TRAIL
+    // COUNTING ANIMATION FOR STAT NUMBERS
+    // ============================================================
+    function animateNumber(el, target, prefix = '', suffix = '', duration = 1200) {
+        if (!el) return;
+        const start = 0;
+        const startTime = performance.now();
+        
+        function update(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = start + (target - start) * eased;
+            
+            let display = Math.round(current);
+            if (target < 1 && target > 0) {
+                display = current.toFixed(1);
+            }
+            el.textContent = prefix + display + suffix;
+            
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = prefix + (typeof target === 'number' && target % 1 !== 0 ? target.toFixed(1) : Math.round(target)) + suffix;
+            }
+        }
+        requestAnimationFrame(update);
+    }
+
+    // Animate all stat numbers with data-target attribute
+    document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+        const target = parseFloat(el.dataset.target);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        if (!isNaN(target)) {
+            animateNumber(el, target, prefix, suffix);
+        }
+    });
+
+    // ============================================================
+    // FLYING PLANE WITH DOTTED TRAIL (preserved from original)
     // ============================================================
     (function() {
         if (window.innerWidth < 768) return;
@@ -100,7 +140,6 @@ const API_KEY = 'swiftie-tears';
         `;
         statsBar.appendChild(container);
 
-        // SVG layer for dots
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('width', '100%');
         svg.setAttribute('height', '60');
@@ -117,7 +156,6 @@ const API_KEY = 'swiftie-tears';
         const dotsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         svg.appendChild(dotsGroup);
 
-        // Plane
         const plane = document.createElement('div');
         plane.textContent = '✈️';
         plane.style.cssText = `
@@ -171,7 +209,6 @@ const API_KEY = 'swiftie-tears';
             plane.style.transform = `translateY(-50%) rotate(${rotation}deg)`;
             plane.style.opacity = opacity;
 
-            // Add a dot every ~2 frames (creates 5-7 visible dots)
             if (Math.random() < 0.5) {
                 dots.push({
                     x: x,
@@ -181,14 +218,12 @@ const API_KEY = 'swiftie-tears';
                 });
             }
 
-            // Keep only recent dots (fade out over 2.5 seconds)
             dots = dots.filter(d => {
                 const age = (time - d.created) / 1000;
                 d.opacity = Math.max(0, 1 - age / 2.5);
                 return d.opacity > 0.01;
             });
 
-            // Render dots
             let dotElements = '';
             dots.forEach(d => {
                 const dotSize = 3 + (1 - d.opacity) * 2;
@@ -212,7 +247,7 @@ const API_KEY = 'swiftie-tears';
     })();
 
     // ============================================================
-    // JET EMISSIONS COUNTER
+    // JET EMISSIONS COUNTER (preserved from original)
     // ============================================================
     (function() {
         if (window.innerWidth < 768) return;
