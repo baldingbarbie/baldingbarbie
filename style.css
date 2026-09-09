@@ -417,11 +417,13 @@ nav .badge {
     -webkit-text-fill-color: transparent;
 }
 
+/* Desktop: 6 visible (2 rows × 3 cols), swipe for rest */
 .facts-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
     gap: 1.25rem;
     overflow-x: auto;
+    overflow-y: visible;
     padding: 0.25rem 0 1rem 0;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -440,13 +442,15 @@ nav .badge {
 }
 
 .fact-card {
+    flex: 0 0 calc(33.333% - 0.9rem);
+    min-width: 280px;
+    max-width: 350px;
     background: var(--surface-solid);
     border-radius: var(--radius);
     padding: 1.5rem;
     border: 1px solid var(--border);
     transition: all var(--transition);
     scroll-snap-align: start;
-    min-width: 280px;
 }
 .fact-card:hover {
     transform: translateY(-3px);
@@ -598,8 +602,11 @@ footer a:hover {
         font-size: 0.65rem;
     }
 
-    .facts-grid {
-        grid-template-columns: repeat(2, 1fr);
+    /* Tablet: 2 columns visible */
+    .fact-card {
+        flex: 0 0 calc(50% - 0.6rem);
+        min-width: 240px;
+        max-width: 400px;
     }
 }
 
@@ -681,6 +688,7 @@ footer a:hover {
         font-size: 0.55rem;
     }
 
+    /* Mobile: single column swipe */
     .facts-grid {
         display: flex;
         flex-wrap: nowrap;
@@ -689,8 +697,6 @@ footer a:hover {
         padding: 0.25rem 0 1rem 0;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        /* Remove grid on mobile, use flex for swipe */
-        grid-template-columns: unset;
     }
     .fact-card {
         flex: 0 0 85%;
