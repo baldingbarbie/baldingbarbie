@@ -4,9 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Balding Barbie — Spin the Wheel</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { background: transparent; }
+    html, body {
+        background: transparent;
+        overflow: hidden;
+    }
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         color: #1a1a1a;
@@ -14,138 +18,270 @@
         flex-direction: column;
         align-items: center;
         padding: 0.5rem 0.5rem 0.25rem;
-        overflow: hidden;
     }
+
     .wheel-question {
         font-size: 0.9rem;
         font-weight: 600;
         color: #666;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         text-align: center;
     }
-    .wheel-wrapper {
-        position: relative;
-        width: 280px;
-        height: 280px;
+
+    /* ===== WRAPPER ===== */
+    #wrapper {
         margin: 0 auto;
+        width: 296px;
+        position: relative;
     }
-    .wheel {
+
+    /* ===== WHEEL ===== */
+    #wheel {
         width: 280px;
         height: 280px;
         border-radius: 50%;
         position: relative;
         overflow: hidden;
-        border: 8px solid #ffffff;
-        box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
+        border: 8px solid #fff;
+        box-shadow: rgba(0,0,0,0.15) 0px 0px 10px, rgba(0,0,0,0.04) 0px 3px 0px;
+        transform: rotate(0deg);
+        background: #fff;
     }
-    .wheel-segments {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: conic-gradient(
-            #ff69b4 0deg 60deg,
-            #b8a9d4 60deg 120deg,
-            #ff69b4 120deg 180deg,
-            #b8a9d4 180deg 240deg,
-            #ff69b4 240deg 300deg,
-            #b8a9d4 300deg 360deg
-        );
-        transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-        position: relative;
-    }
-    .wedge-label {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        font-size: 1.6rem;
-        line-height: 1;
-        pointer-events: none;
-    }
-    .wedge-label span {
-        display: block;
-        transform: translate(-50%, -50%);
-    }
-    .wheel-pointer {
-        position: absolute;
-        top: -14px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 1.5rem;
-        z-index: 5;
-        color: #1a1a1a;
-        filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
-        line-height: 1;
-    }
-    .spin-btn {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 76px;
-        height: 76px;
-        margin: -38px 0 0 -38px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: none;
-        cursor: pointer;
-        z-index: 10;
-        font-family: inherit;
-        font-weight: 700;
-        font-size: 0.75rem;
-        letter-spacing: 0.5px;
-        color: #1a1a1a;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12), inset 0 -2px 4px rgba(0,0,0,0.05);
-        transition: transform 0.15s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .spin-btn:hover { transform: scale(1.05); }
-    .spin-btn:active { transform: scale(0.96); }
-    .spin-btn:disabled { cursor: not-allowed; opacity: 0.6; }
-    .spin-btn::before {
+
+    #wheel:before {
         content: '';
         position: absolute;
-        top: -9px;
-        left: 50%;
-        transform: translateX(-50%);
+        border: 4px solid rgba(0,0,0,0.08);
+        width: 272px;
+        height: 272px;
+        border-radius: 50%;
+        z-index: 1000;
+        pointer-events: none;
+        top: -4px;
+        left: -4px;
+        box-sizing: border-box;
+    }
+
+    #inner-wheel {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: all 3.5s cubic-bezier(0,.99,.44,.99);
+    }
+
+    /* ===== WEDGES (CSS triangles like OG) ===== */
+    #wheel div.sec {
+        position: absolute;
         width: 0;
         height: 0;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-bottom: 10px solid #1a1a1a;
+        border-style: solid;
+        border-width: 145px 84px 0;
+        border-color: #ff69b4 transparent;
+        transform-origin: 84px 144px;
+        left: 56px;
+        top: -4px;
     }
-    .wheel-result {
-        margin-top: 0.75rem;
+
+    #wheel div.sec:nth-child(1) {
+        transform: rotate(60deg);
+        border-color: #ff69b4 transparent;
+    }
+    #wheel div.sec:nth-child(2) {
+        transform: rotate(120deg);
+        border-color: #d97eb5 transparent;
+    }
+    #wheel div.sec:nth-child(3) {
+        transform: rotate(180deg);
+        border-color: #b8a9d4 transparent;
+    }
+    #wheel div.sec:nth-child(4) {
+        transform: rotate(240deg);
+        border-color: #8fa4d4 transparent;
+    }
+    #wheel div.sec:nth-child(5) {
+        transform: rotate(300deg);
+        border-color: #d4a9c4 transparent;
+    }
+    #wheel div.sec:nth-child(6) {
+        transform: rotate(360deg);
+        border-color: #a68fd4 transparent;
+    }
+
+    /* ===== ICONS INSIDE WEDGES ===== */
+    #wheel div.sec .fa {
+        margin-top: -112px;
+        color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        z-index: 100;
+        display: block;
+        text-align: center;
+        font-size: 28px;
+        margin-left: -14px;
+        text-shadow: rgba(255,255,255,0.1) 0px -1px 0px, rgba(0,0,0,0.2) 0px 1px 0px;
+        pointer-events: none;
+    }
+
+    /* ===== CENTER SPIN BUTTON ===== */
+    #spin {
+        width: 68px;
+        height: 68px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -34px 0 0 -34px;
+        border-radius: 50%;
+        box-shadow: rgba(0,0,0,0.1) 0px 3px 0px;
+        z-index: 1000;
+        background: #ff69b4;
+        cursor: pointer;
+        font-family: inherit;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    #spin:after {
+        content: "SPIN";
+        text-align: center;
+        line-height: 68px;
+        color: #fff;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 100;
+        width: 68px;
+        height: 68px;
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    #spin:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 14px 20px 14px;
+        border-color: transparent transparent #ff69b4 transparent;
+        top: -14px;
+        left: 20px;
+    }
+
+    #inner-spin {
+        width: 54px;
+        height: 54px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -27px 0 0 -27px;
+        border-radius: 50%;
+        z-index: 99;
+        box-shadow: rgba(255,255,255,1) 0px -2px 0px inset, rgba(255,255,255,1) 0px 2px 0px inset, rgba(0,0,0,0.15) 0px 0px 5px;
+        background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,182,213,1) 100%);
+    }
+
+    #spin:active #inner-spin {
+        box-shadow: rgba(0,0,0,0.3) 0px 0px 5px inset;
+    }
+
+    #spin:active:after {
+        font-size: 12px;
+    }
+
+    /* ===== SHINE OVERLAY (3D glass effect) ===== */
+    #shine {
+        width: 280px;
+        height: 280px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(255,255,255,1) 0%,
+            rgba(255,255,255,0.99) 1%,
+            rgba(255,255,255,0.91) 9%,
+            rgba(255,255,255,0) 100%
+        );
+        opacity: 0.12;
+        pointer-events: none;
+        border-radius: 50%;
+    }
+
+    /* ===== WOBBLE ANIMATION ===== */
+    @keyframes hh {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(7deg); }
+    }
+    .spin {
+        animation: hh 0.1s;
+    }
+
+    /* ===== RESULT DISPLAY ===== */
+    #winnings {
+        margin-top: 1rem;
         min-height: 3rem;
         max-width: 320px;
         text-align: center;
         font-size: 0.9rem;
         line-height: 1.4;
-        color: #1a1a1a;
         opacity: 0;
-        transition: opacity 0.4s ease;
+        transition: opacity 0.3s ease;
         padding: 0 0.5rem;
     }
-    .wheel-result.show { opacity: 1; }
-    .wheel-result .result-emoji { font-size: 1.5rem; display: block; margin-bottom: 0.15rem; }
-    .wheel-result .result-text { font-weight: 600; }
-    .wheel-result .result-source {
+    #winnings.show {
+        opacity: 1;
+    }
+    #winnings .result-text {
+        font-weight: 700;
+        color: #1a1a1a;
+        display: block;
+    }
+    #winnings .result-source {
         display: block;
         margin-top: 0.25rem;
         font-size: 0.65rem;
         color: #999;
         font-style: italic;
+        font-weight: 400;
     }
+
     @media (max-width: 480px) {
-        .wheel-wrapper, .wheel { width: 240px; height: 240px; }
-        .wedge-label { font-size: 1.4rem; }
-        .spin-btn {
-            width: 64px;
-            height: 64px;
-            margin: -32px 0 0 -32px;
-            font-size: 0.65rem;
+        #wrapper, #wheel, #shine {
+            width: 240px;
+            height: 240px;
+        }
+        #wheel div.sec {
+            border-width: 124px 72px 0;
+            transform-origin: 72px 124px;
+            left: 48px;
+            top: -4px;
+        }
+        #wheel div.sec .fa {
+            margin-top: -96px;
+            font-size: 24px;
+            margin-left: -12px;
+        }
+        #wheel:before {
+            width: 232px;
+            height: 232px;
+        }
+        #spin {
+            width: 60px;
+            height: 60px;
+            margin: -30px 0 0 -30px;
+        }
+        #spin:after {
+            line-height: 60px;
+            width: 60px;
+            height: 60px;
+            font-size: 12px;
+        }
+        #inner-spin {
+            width: 46px;
+            height: 46px;
+            margin: -23px 0 0 -23px;
         }
     }
 </style>
@@ -154,86 +290,105 @@
 
     <div class="wheel-question">What should Taylor do today? 🎰</div>
 
-    <div class="wheel-wrapper">
-        <div class="wheel-pointer">▼</div>
-        <div class="wheel" id="wheel">
-            <div class="wheel-segments" id="wheelSegments"></div>
+    <div id="wrapper">
+        <div id="wheel">
+            <div id="inner-wheel">
+                <div class="sec"><span class="fa fa-hand-holding-dollar"></span></div>
+                <div class="sec"><span class="fa fa-ban"></span></div>
+                <div class="sec"><span class="fa fa-record-vinyl"></span></div>
+                <div class="sec"><span class="fa fa-guitar"></span></div>
+                <div class="sec"><span class="fa fa-plane-departure"></span></div>
+                <div class="sec"><span class="fa fa-volume-mute"></span></div>
+            </div>
+            <div id="spin">
+                <div id="inner-spin"></div>
+            </div>
+            <div id="shine"></div>
         </div>
-        <button class="spin-btn" id="spinBtn">SPIN</button>
-    </div>
 
-    <div class="wheel-result" id="wheelResult">
-        <span class="result-emoji"></span>
-        <span class="result-text"></span>
-        <span class="result-source"></span>
+        <div id="winnings"></div>
     </div>
 
 <script>
 (function() {
     const SEGMENTS = [
-        { emoji: '<span style="display:inline-block;transform:scaleX(-1)">💰</span>', text: 'Donate to Turning Point USA', source: 'seems like something she would do..' },
-        { emoji: '💅', text: 'Block another female artist from #1', source: '— again! for the 100th time!' },
-        { emoji: '📦', text: 'Release 24 vinyl variants', source: '— chart manipulation speedrun' },
-        { emoji: '🎸', text: 'Steal credits from Olivia Rodrigo', source: '— millions in royalties, gone!' },
-        { emoji: '✈️', text: 'Take a 4-minute jet flight', source: '— 138 tons of CO₂ won\'t emit itself' },
-        { emoji: '🔇', text: 'Stay silent on ICE', source: '— while everyone else speaks up!' }
+        { text: 'Donate to Turning Point USA', source: '— reported by literally no one' },
+        { text: 'Block another female artist from #1', source: '— for the 100th time!' },
+        { text: 'Release 24 vinyl variants', source: '— chart manipulation speedrun' },
+        { text: 'Steal credits from Olivia Rodrigo', source: '— millions in royalties, gone!' },
+        { text: 'Take a 4-minute jet flight', source: '— 138 tons of CO₂ won\'t emit itself' },
+        { text: 'Stay silent on ICE', source: '— while everyone else speaks up!' }
     ];
 
     const SEGMENT_ANGLE = 360 / SEGMENTS.length;
-    const SPIN_DURATION = 4000;
+    const SPIN_DURATION = 3500; // matches CSS transition
+    const BASE_DEGREE = 1800; // 5 full spins
 
-    const wheelSegments = document.getElementById('wheelSegments');
-    const spinBtn = document.getElementById('spinBtn');
-    const resultEl = document.getElementById('wheelResult');
+    const innerWheel = document.getElementById('inner-wheel');
+    const spinBtn = document.getElementById('spin');
+    const winnings = document.getElementById('winnings');
 
-    function placeLabels() {
-        const radius = 88;
-        SEGMENTS.forEach((seg, i) => {
-            const centerAngle = i * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
-            const label = document.createElement('div');
-            label.className = 'wedge-label';
-            label.style.transform = `rotate(${centerAngle}deg) translate(0, -${radius}px) rotate(-${centerAngle}deg)`;
-            label.innerHTML = '<span>' + seg.emoji + '</span>';
-            wheelSegments.appendChild(label);
-        });
-    }
-    placeLabels();
-
-    let currentRotation = 0;
+    let clicks = 0;
     let isSpinning = false;
 
-    function spin() {
-        if (isSpinning) return;
-        isSpinning = true;
-        spinBtn.disabled = true;
-        resultEl.classList.remove('show');
-
-        const winningIndex = Math.floor(Math.random() * SEGMENTS.length);
-        const wedgeAngle = winningIndex * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
-        const targetAngle = -wedgeAngle;
-
-        const extraSpins = 5 + Math.floor(Math.random() * 3);
-        const totalRotation = currentRotation + (extraSpins * 360) + (targetAngle - (currentRotation % 360));
-
-        wheelSegments.style.transform = `rotate(${totalRotation}deg)`;
-        currentRotation = totalRotation;
-
-        setTimeout(function() {
-            const win = SEGMENTS[winningIndex];
-            resultEl.querySelector('.result-emoji').textContent = win.emoji;
-            resultEl.querySelector('.result-text').textContent = win.text;
-            resultEl.querySelector('.result-source').textContent = win.source;
-            resultEl.classList.add('show');
-
-            isSpinning = false;
-            spinBtn.disabled = false;
-
-            reportHeight();
-        }, SPIN_DURATION + 100);
+    // Sound of the "tick" wobble — check if wedge passes indicator
+    function wobbleCheck(deg) {
+        // Wedge boundaries every 60deg. If the wheel rotation mod 60 is near 0, we're at an edge.
+        const mod = ((deg % 60) + 60) % 60;
+        if (mod < 2 || mod > 58) {
+            spinBtn.classList.add('spin');
+            setTimeout(() => spinBtn.classList.remove('spin'), 100);
+        }
     }
 
-    spinBtn.addEventListener('click', spin);
+    spinBtn.addEventListener('click', function() {
+        if (isSpinning) return;
+        isSpinning = true;
 
+        clicks++;
+
+        // Pick random wedge (0-5)
+        const winningIndex = Math.floor(Math.random() * SEGMENTS.length);
+
+        // Wedge center angle: 30, 90, 150, 210, 270, 330
+        const wedgeCenterAngle = winningIndex * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
+
+        // To land wedge center under the top pointer (0deg), rotate by -(wedgeCenterAngle)
+        const targetAngle = -wedgeCenterAngle;
+
+        // Total rotation: base spins + target
+        const totalDegree = BASE_DEGREE * clicks + targetAngle;
+
+        // Apply rotation
+        innerWheel.style.transform = `rotate(${totalDegree}deg)`;
+
+        // Wobble check interval during spin
+        const startTime = performance.now();
+        const wobbleInterval = setInterval(() => {
+            const elapsed = performance.now() - startTime;
+            if (elapsed >= SPIN_DURATION) {
+                clearInterval(wobbleInterval);
+                return;
+            }
+            const progress = elapsed / SPIN_DURATION;
+            const currentDeg = totalDegree * progress;
+            wobbleCheck(currentDeg);
+        }, 30);
+
+        // After spin, show result
+        setTimeout(function() {
+            const win = SEGMENTS[winningIndex];
+            winnings.innerHTML = `
+                <span class="result-text">${win.text}</span>
+                <span class="result-source">${win.source}</span>
+            `;
+            winnings.classList.add('show');
+            isSpinning = false;
+            reportHeight();
+        }, SPIN_DURATION + 100);
+    });
+
+    // ===== REPORT HEIGHT TO PARENT IFRAME =====
     function reportHeight() {
         const height = document.body.scrollHeight;
         try {
