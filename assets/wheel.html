@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Balding Barbie — Spin the Wheel</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        background: #ffffff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #1a1a1a;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 1rem;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .wheel-question {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 0.75rem;
+        text-align: center;
+    }
+
+    /* ===== WHEEL WRAPPER ===== */
+    .wheel-wrapper {
+        position: relative;
+        width: 280px;
+        height: 280px;
+        margin: 0 auto;
+    }
+
+    /* ===== WHEEL ===== */
+    .wheel {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        border: 8px solid #ffffff;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.08);
+        transform: rotate(0deg);
+    }
+
+    /* Wedges via conic-gradient */
+    .wheel-segments {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: conic-gradient(
+            #ff69b4 0deg 60deg,
+            #b8a9d4 60deg 120deg,
+            #ff69b4 120deg 180deg,
+            #b8a9d4 180deg 240deg,
+            #ff69b4 240deg 300deg,
+            #b8a9d4 300deg 360deg
+        );
+        transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        position: relative;
+    }
+
+    /* Emoji labels positioned around the wheel */
+    .wedge-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 1.8rem;
+        line-height: 1;
+        transform-origin: 0 0;
+        pointer-events: none;
+        /* each wedge label will be positioned by JS-inline or computed transforms */
+    }
+    .wedge-label span {
+        display: inline-block;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Pointer at top */
+    .wheel-pointer {
+        position: absolute;
+        top: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.6rem;
+        z-index: 5;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    }
+
+    /* Center SPIN button */
+    .spin-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 76px;
+        height: 76px;
+        margin: -38px 0 0 -38px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+        color: #1a1a1a;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12), inset 0 -2px 4px rgba(0,0,0,0.05);
+        transition: transform 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .spin-btn:hover {
+        transform: scale(1.05);
+    }
+    .spin-btn:active {
+        transform: scale(0.96);
+    }
+    .spin-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    .spin-btn::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 12px solid #1a1a1a;
+    }
+
+    /* Result display */
+    .wheel-result {
+        margin-top: 1.25rem;
+        min-height: 3.5rem;
+        max-width: 320px;
+        text-align: center;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #1a1a1a;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        padding: 0 0.5rem;
+    }
+    .wheel-result.show {
+        opacity: 1;
+    }
+    .wheel-result .result-emoji {
+        font-size: 1.6rem;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+    .wheel-result .result-text {
+        font-weight: 600;
+    }
+    .wheel-result .result-source {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.65rem;
+        color: #999;
+        font-style: italic;
+    }
+
+    @media (max-width: 480px) {
+        .wheel-wrapper,
+        .wheel {
+            width: 240px;
+            height: 240px;
+        }
+        .wedge-label {
+            font-size: 1.5rem;
+        }
+        .spin-btn {
+            width: 64px;
+            height: 64px;
+            margin: -32px 0 0 -32px;
+            font-size: 0.65rem;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <div class="wheel-question">What should Taylor do today? 🎰</div>
+
+    <div class="wheel-wrapper">
+        <div class="wheel-pointer">▼</div>
+        <div class="wheel" id="wheel">
+            <div class="wheel-segments" id="wheelSegments">
+                <!-- Emoji labels injected by JS -->
+            </div>
+        </div>
+        <button class="spin-btn" id="spinBtn">SPIN</button>
+    </div>
+
+    <div class="wheel-result" id="wheelResult">
+        <span class="result-emoji"></span>
+        <span class="result-text"></span>
+        <span class="result-source"></span>
+    </div>
+
+<script>
+(function() {
+    // ===== CONFIG =====
+    const SEGMENTS = [
+        { emoji: '💰', text: 'Donate to Turning Point USA', source: '— reported by literally no one' },
+        { emoji: '💅', text: 'Block Charli XCX from #1', source: '— again! for the 4th time!' },
+        { emoji: '📦', text: 'Release 24 vinyl variants', source: '— chart manipulation speedrun' },
+        { emoji: '🎸', text: 'Steal credits from Olivia Rodrigo', source: '— millions in royalties, gone!' },
+        { emoji: '✈️', text: 'Take a 4-minute jet flight', source: '— 138 tons of CO₂ won\'t emit itself' },
+        { emoji: '🔇', text: 'Stay silent on ICE', source: '— while everyone else speaks up!' }
+    ];
+
+    const SEGMENT_ANGLE = 360 / SEGMENTS.length;
+    const SPIN_DURATION = 4000; // matches CSS transition
+
+    // ===== ELEMENTS =====
+    const wheelSegments = document.getElementById('wheelSegments');
+    const spinBtn = document.getElementById('spinBtn');
+    const resultEl = document.getElementById('wheelResult');
+
+    // ===== PLACE EMOJI LABELS ON WHEEL =====
+    // Each label is positioned around the wheel at the center of its wedge
+    function placeLabels() {
+        const radius = 90; // distance from center to label
+        const containerSize = 280; // wheel width/height
+        const center = containerSize / 2;
+
+        SEGMENTS.forEach((seg, i) => {
+            // Center angle of this wedge (in degrees, starting from top = 0deg)
+            const angle = i * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
+
+            // Convert to radians; -90 because 0deg in conic-gradient is top, but CSS transforms are right=0
+            const rad = (angle - 90) * Math.PI / 180;
+
+            const x = center + radius * Math.cos(rad);
+            const y = center + radius * Math.sin(rad);
+
+            const label = document.createElement('div');
+            label.className = 'wedge-label';
+            label.style.left = x + 'px';
+            label.style.top = y + 'px';
+            label.innerHTML = '<span>' + seg.emoji + '</span>';
+            wheelSegments.appendChild(label);
+        });
+    }
+    placeLabels();
+
+    // ===== SPIN LOGIC =====
+    let currentRotation = 0;
+    let isSpinning = false;
+
+    function spin() {
+        if (isSpinning) return;
+        isSpinning = true;
+        spinBtn.disabled = true;
+        resultEl.classList.remove('show');
+
+        // Pick random wedge
+        const winningIndex = Math.floor(Math.random() * SEGMENTS.length);
+
+        // Calculate rotation so winning wedge lands under pointer (top)
+        // Pointer is at top (0deg in conic-gradient terms).
+        // Wedge i center is at i*60 + 30 degrees from top.
+        // To bring it to top, rotate wheel by -(i*60 + 30) mod 360
+        const wedgeAngle = winningIndex * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
+        const targetAngle = -wedgeAngle;
+
+        // Add multiple full rotations for effect
+        const extraSpins = 5 + Math.floor(Math.random() * 3); // 5-7 full spins
+        const totalRotation = currentRotation + (extraSpins * 360) + (targetAngle - (currentRotation % 360));
+
+        // Apply rotation
+        wheelSegments.style.transform = `rotate(${totalRotation}deg)`;
+        currentRotation = totalRotation;
+
+        // After spin finishes, show result
+        setTimeout(function() {
+            const win = SEGMENTS[winningIndex];
+            resultEl.querySelector('.result-emoji').textContent = win.emoji;
+            resultEl.querySelector('.result-text').textContent = win.text;
+            resultEl.querySelector('.result-source').textContent = win.source;
+            resultEl.classList.add('show');
+
+            isSpinning = false;
+            spinBtn.disabled = false;
+        }, SPIN_DURATION + 100);
+    }
+
+    spinBtn.addEventListener('click', spin);
+
+    // ===== AUTO-RESIZE MESSAGE TO PARENT (for iframe) =====
+    // Send height to parent so iframe can size correctly
+    function reportHeight() {
+        const height = document.body.scrollHeight;
+        try {
+            window.parent.postMessage({ type: 'wheelHeight', height: height }, '*');
+        } catch (e) {
+            // silent fail if not in iframe
+        }
+    }
+    window.addEventListener('load', reportHeight);
+    window.addEventListener('resize', reportHeight);
+    setTimeout(reportHeight, 500); // safety
+})();
+</script>
+
+</body>
+</html>
