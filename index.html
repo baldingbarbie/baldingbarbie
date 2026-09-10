@@ -242,11 +242,12 @@
         <!-- Taylor Wheel -->
         <div style="margin-top:2rem;border-top:1px solid var(--border);padding-top:1.5rem;">
             <iframe
-                src="/assets/wheel.html"
+                src="assets/wheel.html"
                 id="wheelFrame"
-                style="width:100%;border:none;min-height:520px;display:block;"
+                style="width:100%;border:none;height:440px;display:block;transition:height 0.3s ease;"
                 title="What should Taylor do today?"
                 loading="lazy"
+                scrolling="no"
             ></iframe>
         </div>
     </section>
@@ -270,7 +271,7 @@
             if (e.data && e.data.type === 'wheelHeight') {
                 const frame = document.getElementById('wheelFrame');
                 if (frame) {
-                    frame.style.height = Math.max(520, e.data.height + 20) + 'px';
+                    frame.style.height = Math.max(420, e.data.height + 8) + 'px';
                 }
             }
         });
