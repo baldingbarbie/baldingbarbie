@@ -265,5 +265,15 @@
     </footer>
 
     <script src="script.js?v=0.21"></script>
+    <script>
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'wheelHeight') {
+                const frame = document.getElementById('wheelFrame');
+                if (frame) {
+                    frame.style.height = Math.max(520, e.data.height + 20) + 'px';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

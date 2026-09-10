@@ -403,14 +403,4 @@ const API_KEY = 'swiftie-tears';
     setInterval(rotateStreaming, 12000);
     rotateStreaming();
 
-
-    window.addEventListener('message', function(e) {
-        if (e.data && e.data.type === 'wheelHeight') {
-            const frame = document.getElementById('wheelFrame');
-            if (frame) {
-                frame.style.height = Math.max(480, e.data.height + 20) + 'px';
-            }
-        }
-    });
-
 })();
