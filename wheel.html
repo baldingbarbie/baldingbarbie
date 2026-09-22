@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Balding Barbie — Spin the Wheel</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" crossorigin="anonymous" />
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
@@ -17,13 +17,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 0.5rem 0.5rem 0.25rem;
+        padding: 0.5rem 0.5rem 0.5rem;
     }
 
     .wheel-question {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #666;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #444;
         margin-bottom: 0.75rem;
         text-align: center;
     }
@@ -33,6 +33,9 @@
         margin: 0 auto;
         width: 296px;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     /* ===== WHEEL ===== */
@@ -161,53 +164,47 @@
         background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,182,213,1) 100%);
     }
 
-    /* ===== SHINE OVERLAY ===== */
-    #shine {
-        width: 280px;
-        height: 280px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: radial-gradient(
-            ellipse at center,
-            rgba(255,255,255,1) 0%,
-            rgba(255,255,255,0) 100%
-        );
-        opacity: 0.12;
-        pointer-events: none;
-        border-radius: 50%;
-    }
-
-    /* ===== RESULT DISPLAY ===== */
+    /* ===== RESULT BANNER ===== */
     #winnings {
         margin-top: 1rem;
-        min-height: 3.5rem;
-        max-width: 320px;
+        width: 100%;
+        max-width: 280px;
+        min-height: 60px;
         text-align: center;
-        font-size: 0.95rem;
-        line-height: 1.4;
+        background: #ffffff;
+        border: 2px solid #ff69b4;
+        border-radius: 12px;
+        padding: 0.75rem 0.5rem;
+        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
         opacity: 0;
-        transition: opacity 0.3s ease;
-        padding: 0 0.5rem;
+        transform: translateY(10px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        visibility: hidden;
     }
+
     #winnings.show {
         opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
     }
+
     #winnings .result-text {
         font-weight: 700;
         color: #1a1a1a;
+        font-size: 0.9rem;
         display: block;
     }
+
     #winnings .result-source {
         display: block;
         margin-top: 0.25rem;
         font-size: 0.75rem;
-        color: #888;
+        color: #777;
         font-style: italic;
     }
 
     @media (max-width: 480px) {
-        #wrapper, #wheel, #shine {
+        #wrapper, #wheel {
             width: 240px;
             height: 240px;
         }
@@ -261,9 +258,9 @@
             <div id="spin">
                 <div id="inner-spin"></div>
             </div>
-            <div id="shine"></div>
         </div>
 
+        <!-- Result Banner -->
         <div id="winnings"></div>
     </div>
 
@@ -289,6 +286,17 @@
     let clicks = 0;
     let isSpinning = false;
 
+    // Safe wrapper to prevent extension errors from throwing uncaught promises
+    function safePostMessage(msg) {
+        try {
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage(msg, '*');
+            }
+        } catch (e) {
+            // Silence extension cross-origin postMessage errors
+        }
+    }
+
     spinBtn.addEventListener('click', function() {
         if (isSpinning) return;
         isSpinning = true;
@@ -296,18 +304,17 @@
         clicks++;
         winnings.classList.remove('show');
 
-        // Pick random wedge (0 to 5)
+        // Random segment selection (0 to 5)
         const winningIndex = Math.floor(Math.random() * SEGMENTS.length);
 
-        // Center angle of chosen wedge (0deg is top indicator)
+        // Calculate rotation target
         const wedgeCenterAngle = winningIndex * SEGMENT_ANGLE + (SEGMENT_ANGLE / 2);
         const targetAngle = 360 - wedgeCenterAngle;
-
-        // Total rotation
         const totalDegree = (BASE_DEGREE * clicks) + targetAngle;
 
         innerWheel.style.transform = `rotate(${totalDegree}deg)`;
 
+        // Show banner after rotation ends
         setTimeout(function() {
             const win = SEGMENTS[winningIndex];
             winnings.innerHTML = `
@@ -322,9 +329,7 @@
 
     function reportHeight() {
         const height = document.body.scrollHeight;
-        try {
-            window.parent.postMessage({ type: 'wheelHeight', height: height }, '*');
-        } catch (e) {}
+        safePostMessage({ type: 'wheelHeight', height: height });
     }
 
     window.addEventListener('load', () => {

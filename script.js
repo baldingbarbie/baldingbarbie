@@ -2,68 +2,36 @@ const API_NAMESPACE = 'baldingbarbie';
 const API_KEY = 'swiftie-tears';
 
 (function() {
+    // ============================================================
+    // COUNTER MANAGEMENT
+    // ============================================================
     function updateDisplay(count) {
         document.querySelectorAll('#tearCounter, #tearCounter2').forEach(el => {
-            if (el) el.textContent = count;
+            if (el) el.textContent = Number(count).toLocaleString();
         });
     }
 
-    function fetchTears() {
-        return fetch(`https://api.countapi.xyz/get/${API_NAMESPACE}/${API_KEY}`)
-            .then(res => {
-                if (!res.ok) throw new Error('API error');
-                return res.json();
-            })
-            .then(data => {
-                const count = data.value || 0;
-                updateDisplay(count);
-                return count;
-            })
-            .catch(() => {
-                let localCount = parseInt(localStorage.getItem('swiftieTears')) || 0;
-                updateDisplay(localCount);
-                return localCount;
-            });
+    function getTears() {
+        let count = parseInt(localStorage.getItem('swiftieTears'), 10);
+        if (isNaN(count) || count < 1342) {
+            count = 1342; // Base default count
+            localStorage.setItem('swiftieTears', String(count));
+        }
+        updateDisplay(count);
+        return count;
     }
 
     function incrementTears() {
-        let currentCount = parseInt(document.getElementById('tearCounter')?.textContent || 0);
-        updateDisplay(currentCount + 1);
-
-        fetch(`https://api.countapi.xyz/hit/${API_NAMESPACE}/${API_KEY}`)
-            .then(res => {
-                if (!res.ok) throw new Error('API error');
-                return res.json();
-            })
-            .then(data => {
-                const newCount = data.value || 0;
-                updateDisplay(newCount);
-                localStorage.setItem('swiftieTears', String(newCount));
-            })
-            .catch(() => {
-                let fallback = parseInt(localStorage.getItem('swiftieTears')) || 0;
-                fallback += 1;
-                localStorage.setItem('swiftieTears', String(fallback));
-                updateDisplay(fallback);
-            });
+        let current = getTears();
+        let newCount = current + 1;
+        localStorage.setItem('swiftieTears', String(newCount));
+        updateDisplay(newCount);
     }
 
     function autoIncrement() {
         if (!sessionStorage.getItem('tearVisited')) {
             sessionStorage.setItem('tearVisited', 'true');
-            fetch(`https://api.countapi.xyz/hit/${API_NAMESPACE}/${API_KEY}`)
-                .then(res => res.json())
-                .then(data => {
-                    const count = data.value || 0;
-                    updateDisplay(count);
-                    localStorage.setItem('swiftieTears', String(count));
-                })
-                .catch(() => {
-                    let fallback = parseInt(localStorage.getItem('swiftieTears')) || 0;
-                    fallback += 1;
-                    localStorage.setItem('swiftieTears', String(fallback));
-                    updateDisplay(fallback);
-                });
+            incrementTears();
         }
     }
 
@@ -71,11 +39,20 @@ const API_KEY = 'swiftie-tears';
         incrementTears();
     };
 
-    fetchTears().then(() => {
-        autoIncrement();
-    });
+    getTears();
+    autoIncrement();
 
-    setInterval(fetchTears, 60000);
+    // ============================================================
+    // IFRAME HEIGHT RESIZER (RECEIVER FOR WHEEL.HTML)
+    // ============================================================
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'wheelHeight') {
+            const wheelIframe = document.querySelector('iframe[src*="wheel.html"]');
+            if (wheelIframe && event.data.height) {
+                wheelIframe.style.height = (event.data.height + 10) + 'px';
+            }
+        }
+    });
 
     // ============================================================
     // COUNTING ANIMATION FOR STAT NUMBERS
@@ -152,7 +129,7 @@ const API_KEY = 'swiftie-tears';
     };
 
     // ============================================================
-    // CONFETTI 
+    // CONFETTI CANVASES
     // ============================================================
     function spawnConfetti(count) {
         const canvas = document.getElementById('confettiCanvas') || (() => {
@@ -188,14 +165,20 @@ const API_KEY = 'swiftie-tears';
                 p.y += p.vy;
                 p.vy += 0.05;
                 p.life -= p.decay;
-                if (p.life > 0) { alive = true;
+                if (p.life > 0) { 
+                    alive = true;
                     ctx.globalAlpha = p.life;
                     ctx.fillStyle = p.color;
-                    ctx.fillRect(p.x, p.y, p.size, p.size * 0.6); }
+                    ctx.fillRect(p.x, p.y, p.size, p.size * 0.6); 
+                }
             });
             ctx.globalAlpha = 1;
-            if (alive && frame < 300) { requestAnimationFrame(animate);
-                frame++; } else { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+            if (alive && frame < 300) { 
+                requestAnimationFrame(animate);
+                frame++; 
+            } else { 
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            }
         }
         animate();
     }
