@@ -66,58 +66,40 @@
         width: 100%;
         height: 100%;
         position: relative;
-        transition: all 3.5s cubic-bezier(0,.99,.44,.99);
+        transition: transform 3.5s cubic-bezier(0, .99, .44, .99);
     }
 
-    /* ===== WEDGES (CSS triangles like OG) ===== */
+    /* ===== WEDGES ===== */
     #wheel div.sec {
         position: absolute;
         width: 0;
         height: 0;
         border-style: solid;
-        border-width: 145px 84px 0;
+        border-width: 140px 81px 0;
         border-color: #ff69b4 transparent;
-        transform-origin: 84px 144px;
-        left: 56px;
-        top: -4px;
+        transform-origin: 81px 140px;
+        left: 59px;
+        top: 0px;
     }
 
-    #wheel div.sec:nth-child(1) {
-        transform: rotate(60deg);
-        border-color: #ff69b4 transparent;
-    }
-    #wheel div.sec:nth-child(2) {
-        transform: rotate(120deg);
-        border-color: #d97eb5 transparent;
-    }
-    #wheel div.sec:nth-child(3) {
-        transform: rotate(180deg);
-        border-color: #b8a9d4 transparent;
-    }
-    #wheel div.sec:nth-child(4) {
-        transform: rotate(240deg);
-        border-color: #8fa4d4 transparent;
-    }
-    #wheel div.sec:nth-child(5) {
-        transform: rotate(300deg);
-        border-color: #d4a9c4 transparent;
-    }
-    #wheel div.sec:nth-child(6) {
-        transform: rotate(360deg);
-        border-color: #a68fd4 transparent;
-    }
+    #wheel div.sec:nth-child(1) { transform: rotate(0deg); border-color: #ff69b4 transparent; }
+    #wheel div.sec:nth-child(2) { transform: rotate(60deg); border-color: #d97eb5 transparent; }
+    #wheel div.sec:nth-child(3) { transform: rotate(120deg); border-color: #b8a9d4 transparent; }
+    #wheel div.sec:nth-child(4) { transform: rotate(180deg); border-color: #8fa4d4 transparent; }
+    #wheel div.sec:nth-child(5) { transform: rotate(240deg); border-color: #d4a9c4 transparent; }
+    #wheel div.sec:nth-child(6) { transform: rotate(300deg); border-color: #a68fd4 transparent; }
 
     /* ===== ICONS INSIDE WEDGES ===== */
     #wheel div.sec .fa {
-        margin-top: -112px;
-        color: rgba(255, 255, 255, 0.85);
+        margin-top: -115px;
+        color: rgba(255, 255, 255, 0.95);
         position: relative;
         z-index: 100;
         display: block;
         text-align: center;
-        font-size: 28px;
-        margin-left: -14px;
-        text-shadow: rgba(255,255,255,0.1) 0px -1px 0px, rgba(0,0,0,0.2) 0px 1px 0px;
+        font-size: 24px;
+        margin-left: -12px;
+        text-shadow: rgba(0,0,0,0.2) 0px 1px 2px;
         pointer-events: none;
     }
 
@@ -135,9 +117,6 @@
         background: #ff69b4;
         cursor: pointer;
         font-family: inherit;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
         user-select: none;
     }
 
@@ -182,15 +161,7 @@
         background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,182,213,1) 100%);
     }
 
-    #spin:active #inner-spin {
-        box-shadow: rgba(0,0,0,0.3) 0px 0px 5px inset;
-    }
-
-    #spin:active:after {
-        font-size: 12px;
-    }
-
-    /* ===== SHINE OVERLAY (3D glass effect) ===== */
+    /* ===== SHINE OVERLAY ===== */
     #shine {
         width: 280px;
         height: 280px;
@@ -200,8 +171,6 @@
         background: radial-gradient(
             ellipse at center,
             rgba(255,255,255,1) 0%,
-            rgba(255,255,255,0.99) 1%,
-            rgba(255,255,255,0.91) 9%,
             rgba(255,255,255,0) 100%
         );
         opacity: 0.12;
@@ -209,22 +178,13 @@
         border-radius: 50%;
     }
 
-    /* ===== WOBBLE ANIMATION ===== */
-    @keyframes hh {
-        0%, 100% { transform: rotate(0deg); }
-        50% { transform: rotate(7deg); }
-    }
-    .spin {
-        animation: hh 0.1s;
-    }
-
     /* ===== RESULT DISPLAY ===== */
     #winnings {
         margin-top: 1rem;
-        min-height: 3rem;
+        min-height: 3.5rem;
         max-width: 320px;
         text-align: center;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         line-height: 1.4;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -241,10 +201,9 @@
     #winnings .result-source {
         display: block;
         margin-top: 0.25rem;
-        font-size: 0.65rem;
-        color: #999;
+        font-size: 0.75rem;
+        color: #888;
         font-style: italic;
-        font-weight: 400;
     }
 
     @media (max-width: 480px) {
@@ -253,15 +212,14 @@
             height: 240px;
         }
         #wheel div.sec {
-            border-width: 124px 72px 0;
-            transform-origin: 72px 124px;
-            left: 48px;
-            top: -4px;
+            border-width: 120px 69px 0;
+            transform-origin: 69px 120px;
+            left: 51px;
         }
         #wheel div.sec .fa {
-            margin-top: -96px;
-            font-size: 24px;
-            margin-left: -12px;
+            margin-top: -98px;
+            font-size: 20px;
+            margin-left: -10px;
         }
         #wheel:before {
             width: 232px;
@@ -293,9 +251,9 @@
     <div id="wrapper">
         <div id="wheel">
             <div id="inner-wheel">
-                <div class="sec"><span class="fa fa-hand-holding-dollar"></span></div>
+                <div class="sec"><span class="fa fa-hand-holding-usd"></span></div>
                 <div class="sec"><span class="fa fa-ban"></span></div>
-                <div class="sec"><span class="fa fa-record-vinyl"></span></div>
+                <div class="sec"><span class="fa fa-compact-disc"></span></div>
                 <div class="sec"><span class="fa fa-guitar"></span></div>
                 <div class="sec"><span class="fa fa-plane-departure"></span></div>
                 <div class="sec"><span class="fa fa-volume-mute"></span></div>
@@ -321,8 +279,8 @@
     ];
 
     const SEGMENT_ANGLE = 360 / SEGMENTS.length;
-    const SPIN_DURATION = 3500; // matches CSS transition
-    const BASE_DEGREE = 1800; // 5 full spins
+    const SPIN_DURATION = 3500;
+    const BASE_DEGREE = 1800;
 
     const innerWheel = document.getElementById('inner-wheel');
     const spinBtn = document.getElementById('spin');
@@ -331,51 +289,25 @@
     let clicks = 0;
     let isSpinning = false;
 
-    // Sound of the "tick" wobble — check if wedge passes indicator
-    function wobbleCheck(deg) {
-        // Wedge boundaries every 60deg. If the wheel rotation mod 60 is near 0, we're at an edge.
-        const mod = ((deg % 60) + 60) % 60;
-        if (mod < 2 || mod > 58) {
-            spinBtn.classList.add('spin');
-            setTimeout(() => spinBtn.classList.remove('spin'), 100);
-        }
-    }
-
     spinBtn.addEventListener('click', function() {
         if (isSpinning) return;
         isSpinning = true;
 
         clicks++;
+        winnings.classList.remove('show');
 
-        // Pick random wedge (0-5)
+        // Pick random wedge (0 to 5)
         const winningIndex = Math.floor(Math.random() * SEGMENTS.length);
 
-        // Wedge center angle: 30, 90, 150, 210, 270, 330
-        const wedgeCenterAngle = winningIndex * SEGMENT_ANGLE + SEGMENT_ANGLE / 2;
+        // Center angle of chosen wedge (0deg is top indicator)
+        const wedgeCenterAngle = winningIndex * SEGMENT_ANGLE + (SEGMENT_ANGLE / 2);
+        const targetAngle = 360 - wedgeCenterAngle;
 
-        // To land wedge center under the top pointer (0deg), rotate by -(wedgeCenterAngle)
-        const targetAngle = -wedgeCenterAngle;
+        // Total rotation
+        const totalDegree = (BASE_DEGREE * clicks) + targetAngle;
 
-        // Total rotation: base spins + target
-        const totalDegree = BASE_DEGREE * clicks + targetAngle;
-
-        // Apply rotation
         innerWheel.style.transform = `rotate(${totalDegree}deg)`;
 
-        // Wobble check interval during spin
-        const startTime = performance.now();
-        const wobbleInterval = setInterval(() => {
-            const elapsed = performance.now() - startTime;
-            if (elapsed >= SPIN_DURATION) {
-                clearInterval(wobbleInterval);
-                return;
-            }
-            const progress = elapsed / SPIN_DURATION;
-            const currentDeg = totalDegree * progress;
-            wobbleCheck(currentDeg);
-        }, 30);
-
-        // After spin, show result
         setTimeout(function() {
             const win = SEGMENTS[winningIndex];
             winnings.innerHTML = `
@@ -388,17 +320,16 @@
         }, SPIN_DURATION + 100);
     });
 
-    // ===== REPORT HEIGHT TO PARENT IFRAME =====
     function reportHeight() {
         const height = document.body.scrollHeight;
         try {
             window.parent.postMessage({ type: 'wheelHeight', height: height }, '*');
         } catch (e) {}
     }
+
     window.addEventListener('load', () => {
         reportHeight();
-        setTimeout(reportHeight, 200);
-        setTimeout(reportHeight, 600);
+        setTimeout(reportHeight, 300);
     });
     window.addEventListener('resize', reportHeight);
 })();
