@@ -1,0 +1,299 @@
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+        min-height: auto;
+    }
+
+    .hero-left {
+        max-width: 100%;
+    }
+
+    .hero-badges {
+        justify-content: center;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .hero-right {
+        width: 100%;
+        min-height: 200px;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 110px;
+        padding: 0.75rem 0.5rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1.5rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.75rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.65rem;
+    }
+
+    .fact-card {
+        flex: 0 0 calc(50% - 0.6rem);
+        min-width: 240px;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 56px;
+    }
+
+    .site-header {
+        padding: 0 1rem;
+        height: 56px;
+    }
+
+    .logo h1 {
+        font-size: 0.9rem;
+    }
+
+    .logo span {
+        font-size: 0.55rem;
+    }
+
+    nav a {
+        font-size: 0.75rem;
+    }
+
+    nav .badge {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.6rem;
+    }
+
+    .hero {
+        padding: 1rem 1rem 0.5rem 1rem;
+        gap: 1rem;
+    }
+
+    .avatar-frame {
+        display: none;
+    }
+
+    .hero-left {
+        padding: 0;
+        position: static;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        padding: 0.5rem 1.8rem;
+        font-size: 0.8rem;
+    }
+
+    .hero-badges {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .badge-stream,
+    .badge-fan {
+        font-size: 0.6rem;
+        padding: 0.15rem 0.6rem;
+        white-space: normal;
+    }
+
+    .hero-right {
+        min-height: 140px;
+        max-width: 100%;
+    }
+
+    .hero-carousel {
+        min-height: 140px;
+    }
+
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 90px;
+        padding: 0.5rem 0.3rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1.2rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.65rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.55rem;
+    }
+
+    .facts-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0.75rem;
+        padding: 0.25rem 0 1rem 0;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .fact-card {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+        min-width: 280px;
+        max-width: 340px;
+        padding: 1.25rem;
+    }
+
+    .facts-grid::-webkit-scrollbar {
+        height: 3px;
+    }
+
+    .facts-grid::-webkit-scrollbar-track {
+        background: var(--border);
+        border-radius: 99px;
+    }
+
+    .facts-grid::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 99px;
+    }
+
+    .stats-bar {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        padding: 0 1rem;
+        justify-items: center;
+    }
+
+    .stat-item {
+        padding: 0.75rem 0.5rem;
+        max-width: 140px;
+    }
+
+    .stat-number {
+        font-size: 1.3rem;
+    }
+
+    .stat-label {
+        font-size: 0.55rem;
+    }
+
+    .counter-section {
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .facts-section {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .stacked-icon,
+    .fact-card .icon.stacked-icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        line-height: 1.2rem;
+        font-size: 1.2rem;
+    }
+
+    .stacked-icon .bottom-emoji,
+    .fact-card .icon.stacked-icon .bottom-emoji {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.85rem;
+    }
+
+    .btn-primary {
+        padding: 0.4rem 1.5rem;
+        font-size: 0.75rem;
+    }
+
+    .badge-stream,
+    .badge-fan {
+        font-size: 0.5rem;
+        padding: 0.1rem 0.5rem;
+    }
+
+    .hero-right {
+        min-height: 110px;
+    }
+
+    .hero-carousel {
+        min-height: 110px;
+    }
+
+    .hero-carousel.horizontal .carousel-slide {
+        min-height: 70px;
+        padding: 0.4rem 0.2rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser .teaser-icon {
+        font-size: 1rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser h4 {
+        font-size: 0.55rem;
+    }
+
+    .hero-carousel.horizontal .fact-teaser p {
+        font-size: 0.5rem;
+    }
+
+    .fact-card {
+        flex: 0 0 85%;
+        min-width: 250px;
+        max-width: 300px;
+        padding: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.1rem;
+    }
+
+    .stat-label {
+        font-size: 0.55rem;
+    }
+
+    .counter-section p {
+        font-size: 0.8rem;
+    }
+
+    .spin-wheel {
+        width: 90px;
+        height: 90px;
+    }
+}
