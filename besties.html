@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Me & My Besties Forever 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka+One&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #fdf6ee;
+      --paper-color: #fffdfa;
+      --pink-tape: rgba(255, 182, 193, 0.7);
+      --yellow-tape: rgba(255, 243, 176, 0.7);
+      --font-handwriting: 'Caveat', cursive;
+      --font-heading: 'Fredoka One', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      /* Scrapbook grid background texture */
+      background-image: 
+        radial-gradient(#e2d5c3 1px, transparent 1px),
+        linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 20px 20px;
+      font-family: var(--font-handwriting);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .scrapbook-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Page Header */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      color: #ff69b4;
+      text-shadow: 3px 3px 0px #fff, 5px 5px 0px #333;
+      transform: rotate(-2deg);
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    p.subtitle {
+      font-size: 1.8rem;
+      color: #777;
+      transform: rotate(1deg);
+    }
+
+    /* Photo Grid */
+    .scrapbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem 2rem;
+      padding: 1rem;
+    }
+
+    /* Polaroid Cards */
+    .polaroid {
+      background: var(--paper-color);
+      padding: 15px 15px 25px 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12), 0 4px 6px rgba(0,0,0,0.06);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid #eee;
+    }
+
+    .polaroid .caption {
+      font-size: 1.7rem;
+      text-align: center;
+      margin-top: 12px;
+      font-weight: 700;
+      color: #222;
+      line-height: 1.1;
+    }
+
+    /* Rotation variations for natural scrapbooking look */
+    .polaroid:nth-child(1) { transform: rotate(-4deg); }
+    .polaroid:nth-child(2) { transform: rotate(3deg); }
+    .polaroid:nth-child(3) { transform: rotate(-2deg); }
+    .polaroid:nth-child(4) { transform: rotate(5deg); }
+
+    .polaroid:hover {
+      transform: scale(1.05) rotate(0deg) !important;
+      z-index: 10;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Washi Tape Effect */
+    .polaroid::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 30%;
+      width: 100px;
+      height: 30px;
+      background: var(--pink-tape);
+      transform: rotate(-3deg);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-left: 2px dashed rgba(255,255,255,0.5);
+      border-right: 2px dashed rgba(255,255,255,0.5);
+    }
+
+    .polaroid:nth-child(even)::before {
+      background: var(--yellow-tape);
+      left: 40%;
+      transform: rotate(4deg);
+    }
+
+    /* Sticky Notes & Stickers */
+    .note {
+      background: #ffffa5;
+      padding: 1.2rem;
+      font-size: 1.5rem;
+      box-shadow: 3px 5px 10px rgba(0,0,0,0.1);
+      transform: rotate(-1deg);
+      grid-column: 1 / -1;
+      max-width: 500px;
+      margin: 1rem auto 0 auto;
+      text-align: center;
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .note::after {
+      content: '📌';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+    }
+
+    .sticker {
+      position: absolute;
+      font-size: 2.5rem;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .sticker-1 { top: -10px; right: -10px; transform: rotate(15deg); }
+    .sticker-2 { bottom: -15px; left: -10px; transform: rotate(-20deg); }
+
+    /* Nav back button */
+    .back-btn {
+      display: inline-block;
+      margin-top: 3rem;
+      padding: 0.6rem 1.5rem;
+      background: #ff69b4;
+      color: white;
+      text-decoration: none;
+      font-family: var(--font-heading);
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(255,105,180,0.4);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.08);
+      background: #ff1493;
+    }
+
+    .footer-wrapper {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scrapbook-container">
+    <header>
+      <h1>Inner Circle Besties 💅✨</h1>
+      <p class="subtitle">spilling tea & causing flight delays since 2024</p>
+    </header>
+
+    <main class="scrapbook-grid">
+      
+      <!-- James 1 -->
+      <div class="polaroid">
+        <span class="sticker sticker-1">👑</span>
+        <img src="assets/james1.webp" alt="James 1" />
+        <div class="caption">"Sister Unfiltered" 💋</div>
+      </div>
+
+      <!-- Jeff 1 -->
+      <div class="polaroid">
+        <span class="sticker sticker-2">💅</span>
+        <img src="assets/jeff1.webp" alt="Jeff 1" />
+        <div class="caption">CEO of Apologies 🐍</div>
+      </div>
+
+      <!-- James 2 -->
+      <div class="polaroid">
+        <span class="sticker sticker-1">✨</span>
+        <img src="assets/james2.webp" alt="James 2" />
+        <div class="caption">Glam Squad Duty 💄</div>
+      </div>
+
+      <!-- Jeff 2 -->
+      <div class="polaroid">
+        <span class="sticker sticker-2">🔥</span>
+        <img src="assets/jeff2.webp" alt="Jeff 2" />
+        <div class="caption">Spilling Tea 🍵</div>
+      </div>
+
+    </main>
+
+    <div class="note">
+      "True friendship isn't about being inseparable, it's about making sure nobody finds the chat logs."
+    </div>
+
+    <div class="footer-wrapper">
+      <a href="index.html" class="back-btn">← Back to Main Page</a>
+    </div>
+  </div>
+
+</body>
+</html>
